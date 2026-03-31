@@ -104,37 +104,40 @@ export function Projects() {
                     const logoUrl = techLogos[tech];
                     const name = tech === 'web' ? 'Web' : (tech.charAt(0).toUpperCase() + tech.slice(1));
                     return `
-                        <div class="flex flex-col items-center justify-center p-3 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-700 min-w-[70px]">
-                            <img src="${logoUrl}" alt="${name}" class="h-8 w-8 mb-2" />
-                            <span class="text-[11px] font-bold text-gray-600 dark:text-gray-400 uppercase tracking-wider">${name}</span>
+                        <div class="flex flex-col items-center justify-center p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:shadow-md transition-all duration-300 min-w-[75px] hover:border-blue-400 dark:hover:border-blue-500">
+                            <img src="${logoUrl}" alt="${name}" class="h-8 w-8 mb-2 transition-transform duration-300 hover:scale-110" />
+                            <span class="text-[11px] font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">${name}</span>
                         </div>
                     `;
                 }).join('');
 
                 const githubLink = project.github ? `
-                    <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 mt-6 bg-gray-900 dark:bg-gray-700 text-white rounded-lg hover:bg-gray-800 dark:hover:bg-gray-600 transition-colors font-semibold">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 mt-8 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-lg transition-all duration-300 font-semibold shadow-md hover:shadow-lg transform hover:scale-105">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
                         <span class="lang-fr">Voir sur GitHub</span>
                         <span class="lang-en">View on GitHub</span>
                     </a>
                 ` : '';
 
                 modalBody.innerHTML = `
-                    <div class="${project.bg} h-32 md:h-48 flex items-center justify-center relative overflow-hidden">
-                        ${project.logo ? `<img src="${project.logo}" alt="${project.titre} logo" class="h-32 w-32 md:h-48 md:w-48 object-contain" />` : `<div class="text-6xl md:text-8xl">${project.icon}</div>`}
+                    <div class="h-32 md:h-48 flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30">
+                        <div class="absolute inset-0 opacity-20 dark:opacity-10"></div>
+                        <div class="relative z-10">
+                            ${project.logo ? `<img src="${project.logo}" alt="${project.titre} logo" class="h-32 w-32 md:h-48 md:w-48 object-contain drop-shadow-lg" />` : `<div class="text-6xl md:text-8xl drop-shadow-lg">${project.icon}</div>`}
+                        </div>
                     </div>
-                    <div class="p-8 md:p-10 text-left bg-white dark:bg-gray-800 transition-colors duration-300">
+                    <div class="p-8 md:p-10 text-left bg-white dark:bg-gray-900 transition-colors duration-300">
                         <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-6">
-                            <h2 class="text-3xl font-bold text-gray-900 dark:text-white">${project.titre}</h2>
-                            <span class="px-4 py-1.5 ${project.type === 'univ' ? 'bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300' : 'bg-purple-100 dark:bg-purple-900/50 text-purple-800 dark:text-purple-300'} rounded-full text-sm font-bold capitalize whitespace-nowrap">
+                            <h2 class="text-3xl font-bold modal-title-gradient">${project.titre}</h2>
+                            <span class="px-4 py-1.5 ${project.type === 'univ' ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-700' : 'bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-700'} rounded-full text-sm font-bold capitalize whitespace-nowrap">
                                 <span class="lang-fr">${project.type === 'univ' ? 'Universitaire' : 'Personnel'}</span>
                                 <span class="lang-en">${project.type === 'univ' ? 'Academic' : 'Personal'}</span>
                             </span>
                         </div>
-                        <div class="flex flex-wrap gap-3 mb-8">
+                        <div class="flex flex-wrap gap-3 mb-8 p-4 bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700">
                             ${techIconsHtml}
                         </div>
-                        <div class="prose max-w-none text-gray-600 dark:text-gray-300 space-y-4">
+                        <div class="prose max-w-none text-gray-700 dark:text-gray-300 space-y-4 leading-relaxed">
                             <p>
                                 <span class="lang-fr">${project.detailsFr}</span>
                                 <span class="lang-en">${project.detailsEn}</span>
@@ -357,6 +360,13 @@ export function Projects() {
         .carousel-3d { transform-style: preserve-3d; transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
         .backface-hidden { backface-visibility: hidden; }
         .btn-filtre img { pointer-events: none; }
+        .modal-title-gradient {
+            background: linear-gradient(to right, #2563eb, #9333ea);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
     </style>
     <main class="container mx-auto px-4 py-10 flex-grow overflow-hidden relative pb-20">
         <div class="text-center mb-10 max-w-2xl mx-auto">
@@ -411,9 +421,9 @@ export function Projects() {
         </div>
         
         <div id="projectModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center">
-            <div id="modalOverlay" class="absolute inset-0 bg-gray-900/75 backdrop-blur-sm cursor-pointer"></div>
-            <div id="modalContent" class="relative z-10 w-full max-w-3xl bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden transform scale-95 opacity-0 transition-all duration-300 mx-4 max-h-[90vh] flex flex-col border border-gray-100 dark:border-gray-700">
-                <button id="closeModalBtn" class="absolute top-4 right-4 z-20 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white bg-white/90 dark:bg-gray-800/90 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition shadow-sm border border-gray-200 dark:border-gray-600">
+            <div id="modalOverlay" class="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-pointer"></div>
+            <div id="modalContent" class="relative z-10 w-full max-w-3xl bg-white dark:bg-gray-900 rounded-2xl shadow-2xl overflow-hidden transform scale-95 opacity-0 transition-all duration-300 mx-4 max-h-[90vh] flex flex-col border border-gray-200 dark:border-gray-700">
+                <button id="closeModalBtn" class="absolute top-4 right-4 z-20 p-2 text-gray-600 dark:text-gray-300 hover:text-white hover:bg-red-500 dark:hover:bg-red-600 bg-white dark:bg-gray-800 rounded-full transition shadow-md border border-gray-300 dark:border-gray-600">
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                 </button>
                 <div id="dynamicContentContainer" class="overflow-y-auto"></div>
