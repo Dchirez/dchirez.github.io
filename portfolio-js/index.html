@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Damien CHIREZ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <style>
+        html { scrollbar-width: none; }
+        body::-webkit-scrollbar { display: none; }
+        
+        .lang-en { display: none; }
+        body.fr .lang-fr { display: inline-block; }
+        body.fr .lang-en { display: none !important; }
+        body.en .lang-fr { display: none !important; }
+        body.en .lang-en { display: inline-block; }
+    </style>
+</head>
+<body class="fr bg-slate-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans leading-relaxed flex flex-col min-h-screen transition-colors duration-300">
+    
+    <div id="scroll-progress-track" class="fixed top-0 right-0 w-2 h-full bg-gray-200/50 dark:bg-gray-800/50 z-[9999] pointer-events-none">
+        <div id="scroll-progress-bar" class="absolute top-0 left-0 w-full bg-blue-600 rounded-b-md transition-[height] duration-75 ease-out" style="height: 0%;"></div>
+    </div>
+
+    <div id="app" class="flex-grow flex flex-col w-full"></div>
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>
