@@ -2,7 +2,7 @@ export function renderNav() {
     return `
     <nav class="fixed top-0 w-full h-20 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-sm z-50 transition-colors duration-300">
         <div class="container mx-auto px-4 h-full flex items-center justify-between">
-            <a href="/" class="text-2xl font-bold text-blue-900 dark:text-blue-400 tracking-tight">
+            <a href="#/" class="text-2xl font-bold text-blue-900 dark:text-blue-400 tracking-tight">
                 Damien<span class="text-blue-600 dark:text-blue-500">.Dev</span>
             </a>
             <div class="flex items-center gap-4">
@@ -20,16 +20,16 @@ export function renderNav() {
                     </svg>
                 </button>
                 <div class="hidden md:flex items-center gap-8">
-                    <a href="/" class="font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
+                    <a href="#/" class="font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
                         <span class="lang-fr">Accueil</span><span class="lang-en">Home</span>
                     </a>
-                    <a href="/projets" class="font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
+                    <a href="#/projets" class="font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
                         <span class="lang-fr">Mes projets</span><span class="lang-en">Projects</span>
                     </a>
-                    <a href="/formations" class="font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
+                    <a href="#/formations" class="font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
                         <span class="lang-fr">Formations</span><span class="lang-en">Education</span>
                     </a>
-                    <a href="/contact" class="font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
+                    <a href="#/contact" class="font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
                         <span class="lang-fr">Me contacter</span><span class="lang-en">Contact</span>
                     </a>
                     <a href="/CV_2026-03-18_Damien_Chirez.pdf" target="_blank" class="px-4 py-2 bg-blue-50 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 rounded-lg font-bold">
@@ -40,16 +40,16 @@ export function renderNav() {
         </div>
         <div id="mobile-menu" class="hidden absolute top-20 left-0 w-full bg-white dark:bg-gray-900 shadow-xl z-40 md:hidden border-t border-gray-100 dark:border-gray-800 transition-colors duration-300">
             <div class="flex flex-col px-6 py-4 space-y-4">
-                <a href="/" class="block text-lg font-medium text-gray-700 dark:text-gray-200 border-b border-gray-50 dark:border-gray-800 pb-2">
+                <a href="#/" class="block text-lg font-medium text-gray-700 dark:text-gray-200 border-b border-gray-50 dark:border-gray-800 pb-2">
                     <span class="lang-fr">Accueil</span><span class="lang-en">Home</span>
                 </a>
-                <a href="/projets" class="block text-lg font-medium text-gray-700 dark:text-gray-200 border-b border-gray-50 dark:border-gray-800 pb-2">
+                <a href="#/projets" class="block text-lg font-medium text-gray-700 dark:text-gray-200 border-b border-gray-50 dark:border-gray-800 pb-2">
                     <span class="lang-fr">Mes projets</span><span class="lang-en">Projects</span>
                 </a>
-                <a href="/formations" class="block text-lg font-medium text-gray-700 dark:text-gray-200 border-b border-gray-50 dark:border-gray-800 pb-2">
+                <a href="#/formations" class="block text-lg font-medium text-gray-700 dark:text-gray-200 border-b border-gray-50 dark:border-gray-800 pb-2">
                     <span class="lang-fr">Formations</span><span class="lang-en">Education</span>
                 </a>
-                <a href="/contact" class="block text-lg font-medium text-gray-700 dark:text-gray-200 border-b border-gray-50 dark:border-gray-800 pb-2">
+                <a href="#/contact" class="block text-lg font-medium text-gray-700 dark:text-gray-200 border-b border-gray-50 dark:border-gray-800 pb-2">
                     <span class="lang-fr">Me contacter</span><span class="lang-en">Contact</span>
                 </a>
                 <a href="https://github.com/Dchirez?tab=repositories" target="_blank" class="flex items-center gap-2 text-lg font-medium text-gray-700 dark:text-gray-200 border-b border-gray-50 dark:border-gray-800 pb-2 hover:text-blue-600 dark:hover:text-blue-400 transition">

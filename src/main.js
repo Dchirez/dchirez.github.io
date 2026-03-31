@@ -72,8 +72,8 @@ function updateScrollProgress() {
 }
 
 function handleNavigation() {
-    let path = window.location.pathname;
-    if (!path || path === '/' || path === '') path = '/';
+    let path = window.location.hash.replace('#', '');
+    if (!path || path === '') path = '/';
 
     const view = router[path] || router['/'];
     if (typeof view === 'function') {
@@ -87,23 +87,6 @@ function handleNavigation() {
 }
 
 document.addEventListener('click', (e) => {
-    const link = e.target.closest('a');
-    if (link) {
-        const href = link.getAttribute('href');
-        // Intercepter les liens internes
-        if (href && href.startsWith('/') && !link.target) {
-            e.preventDefault();
-            window.history.pushState({}, '', href);
-            handleNavigation();
-
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.add('hidden');
-            }
-            return;
-        }
-    }
-
     const burgerBtn = e.target.closest('#burger-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
 
@@ -119,7 +102,7 @@ document.addEventListener('click', (e) => {
 
 window.addEventListener('scroll', updateScrollProgress);
 window.addEventListener('resize', updateScrollProgress);
-window.addEventListener('popstate', handleNavigation);
+window.addEventListener('hashchange', handleNavigation);
 window.addEventListener('load', handleNavigation);
 
 handleNavigation();

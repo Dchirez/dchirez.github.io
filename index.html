@@ -29,11 +29,6 @@
     </div>
 
     <div id="app" class="flex-grow flex flex-col w-full"></div>
-    <script>
-        if (window.location.search.startsWith('?/')) {
-            window.history.replaceState(null, null, window.location.pathname + window.location.search.slice(1).replace(/~and~/g, '&') + window.location.hash);
-        }
-    </script>
     <script type="module" src="/src/main.js"></script>
 </body>
 </html>
