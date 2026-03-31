@@ -18,7 +18,7 @@ export function Contact() {
                         name="name"
                         required
                         class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-                        placeholder=""
+                        placeholder="Votre nom ou le nom de votre Entreprise"
                     />
                 </div>
 
@@ -33,7 +33,7 @@ export function Contact() {
                         name="email"
                         required
                         class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-                        placeholder="votre@email.com"
+                        placeholder="Votre @email.com"
                     />
                 </div>
 
@@ -48,7 +48,7 @@ export function Contact() {
                         name="subject"
                         required
                         class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-                        placeholder=""
+                        placeholder="Précisez s'il sagit de stage alternance ou autre"
                     />
                 </div>
 
@@ -63,7 +63,7 @@ export function Contact() {
                         rows="5"
                         required
                         class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition resize-none"
-                        placeholder=""
+                        placeholder=" Détaillez votre demande "
                     ></textarea>
                 </div>
 
@@ -86,11 +86,6 @@ export function Contact() {
                 <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 text-center">
                     <span class="lang-fr">Ou contactez-moi directement :</span><span class="lang-en">Or contact me directly:</span>
                 </p>
-                <div class="flex flex-col md:flex-row gap-4 justify-center">
-                    <a href="tel:+33643246291" class="px-6 py-2 rounded-full border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 font-semibold bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition text-center">
-                        📞 06 43 24 62 91
-                    </a>
-                </div>
             </div>
         </div>
     </main>`;
