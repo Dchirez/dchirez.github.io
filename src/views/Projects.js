@@ -22,20 +22,20 @@ export function Projects() {
             detailsFr: 'Création d\'un site web vitrine complet en HTML et CSS pur, conçu pour organiser le mariage de ses rêves. Afin de proposer l\'expérience utilisateur la plus ergonomique possible, nous avons mené une analyse sur les sites de Wedding Planners les plus populaires de l\'industrie. Ce projet m\'a permis de consolider mes bases en intégration web, en design responsive et en structuration sémantique des pages.',
             detailsEn: 'Creation of a complete showcase website in pure HTML and CSS, designed to plan your dream wedding. To offer the most ergonomic user experience possible, we conducted an analysis on the most popular Wedding Planner sites in the industry. This project allowed me to consolidate my foundations in web integration, responsive design, and semantic page structuring.'
         },
-        { 
-            id: 'quizz', icon: '❓', bg: 'bg-yellow-500', titre: 'Quizz Culture G', tech: 'c', techDisplay: 'C', type: 'perso', 
+        {
+            id: 'quizz', icon: '❓', logo: '/logo/QuizzLogo.png', bg: 'bg-yellow-500', titre: 'Quizz Culture G', tech: 'c', techDisplay: 'C', type: 'perso', 
             descFr: 'Jeu de questions-réponses interactif en console.', descEn: 'Interactive console-based trivia game.',
             detailsFr: 'L\'un de mes tout premiers projets personnels, développé en C. Il s\'agit d\'un jeu de quizz interactif en console testant la culture générale du joueur à travers plusieurs thématiques. L\'utilisateur interagit en saisissant les numéros de ses réponses. Ce projet m\'a aidé à maîtriser les bases de la programmation impérative, la gestion des entrées/sorties standards et les structures de contrôle.',
             detailsEn: 'One of my very first personal projects, developed in C. It is an interactive console quiz game testing the player\'s general knowledge across several themes. The user interacts by entering the numbers of their answers. This project helped me master the basics of imperative programming, standard I/O management, and control structures.'
         },
-        { 
-            id: 'justeprix', icon: '🏷️', bg: 'bg-purple-500', titre: 'Juste Prix', tech: 'c', techDisplay: 'C', type: 'perso', 
+        {
+            id: 'justeprix', icon: '🏷️', logo: '/logo/JustePrixLogo.png', bg: 'bg-purple-500', titre: 'Juste Prix', tech: 'c', techDisplay: 'C', type: 'perso', 
             descFr: 'Mini-jeu basé sur le célèbre concept télévisé.', descEn: 'Mini-game based on the famous TV show concept.',
             detailsFr: 'Mini-jeu développé en C reprenant le concept du "Juste Prix". Le programme génère un prix aléatoire que le joueur doit deviner, en se basant sur un système de niveaux de difficulté paramétrables. Le retour d\'information interactif se fait via la console. C\'était une excellente introduction à la logique algorithmique et à la manipulation des variables aléatoires.',
             detailsEn: 'Mini-game developed in C based on the "Price is Right" concept. The program generates a random price that the player has to guess, based on a system of adjustable difficulty levels. Interactive feedback is provided via the console. This was an excellent introduction to algorithmic logic and random variable manipulation.'
         },
-        { 
-            id: 'pacman', icon: '🟡', bg: 'bg-orange-500', titre: 'Pac-Man', tech: 'java', techDisplay: 'Java / Gradle', type: 'univ', 
+        {
+            id: 'pacman', icon: '🟡', logo: '/logo/PacManLogo.png', bg: 'bg-orange-500', titre: 'Pac-Man', tech: 'java', techDisplay: 'Java / Gradle', type: 'univ', 
             descFr: 'Reproduction du jeu culte avec Patrons de Conception.', descEn: 'Reproduction of the cult game with Design Patterns.',
             detailsFr: 'Projet académique d\'envergure réalisé en équipe de quatre, visant à recréer de A à Z le célèbre jeu Pac-Man en Java et JavaFX, avec l\'outil de build Gradle. Nous y avons implémenté rigoureusement divers Patrons de Conception (Design Patterns) étudiés en cours. Le développement s\'est étalé sur plusieurs semaines selon la méthode Agile, avec des sprints réguliers et une gestion de version stricte via un dépôt Git et un système de tickets.',
             detailsEn: 'Large-scale academic project carried out by a team of four, aiming to recreate the famous Pac-Man game from scratch in Java and JavaFX, using the Gradle build tool. We strictly implemented various Design Patterns studied in class. The development spanned several weeks according to the Agile methodology, with regular sprints and strict version control via a Git repository and an issue tracking system.'
@@ -46,14 +46,14 @@ export function Projects() {
             detailsFr: 'Conception et développement de la toute première version de mon portfolio en ligne. Ce site a été entièrement codé à la main, en partant de zéro, sans utiliser le moindre framework ou bibliothèque externe (HTML/CSS natif). L\'objectif principal était de mettre en pratique mes compétences en conception web et de posséder une première véritable vitrine pour mes projets.',
             detailsEn: 'Design and development of the very first version of my online portfolio. This site was entirely coded by hand from scratch, without using any framework or external library (native HTML/CSS). The main objective was to put my web design skills into practice and to have a real first showcase for my projects.'
         },
-        { 
-            id: 'bataille', icon: '🚢', bg: 'bg-teal-500', titre: 'Bataille Navale', tech: 'c', techDisplay: 'C', type: 'perso', 
+        {
+            id: 'bataille', icon: '🚢', logo: '/logo/BatailleLogo.png', bg: 'bg-teal-500', titre: 'Bataille Navale', tech: 'c', techDisplay: 'C', type: 'perso', 
             descFr: 'Jeu de plateau interactif contre une IA basique.', descEn: 'Interactive board game against a basic AI.',
             detailsFr: 'Jeu de bataille navale classique jouable dans le terminal, entièrement programmé en langage C. Ce projet met en œuvre la manipulation de tableaux à deux dimensions (matrices) pour gérer la grille de jeu de manière fluide, ainsi qu\'une intelligence artificielle basique permettant au joueur d\'affronter l\'ordinateur de manière automatisée.',
             detailsEn: 'Classic battleship game playable in the terminal, entirely programmed in C. This project implements the manipulation of two-dimensional arrays (matrices) to smoothly manage the game grid, as well as a basic artificial intelligence allowing the player to play against the computer automatically.'
         },
-        { 
-            id: 'demineur', icon: '💣', bg: 'bg-red-500', titre: 'Démineur', tech: 'c', techDisplay: 'C', type: 'perso', 
+        {
+            id: 'demineur', icon: '💣', logo: '/logo/DemineurLogo.png', bg: 'bg-red-500', titre: 'Démineur', tech: 'c', techDisplay: 'C', type: 'perso', 
             descFr: 'Génération de grille et algorithme de déminage.', descEn: 'Grid generation and minesweeper algorithm.',
             detailsFr: 'Reproduction du célèbre jeu du Démineur en console, codé en C. Le programme génère dynamiquement une grille à double entrée et y répartit aléatoirement un nombre défini de mines en fonction de la difficulté sélectionnée par l\'utilisateur. Le joueur peut interagir en saisissant les coordonnées pour révéler une case ou y placer un drapeau.',
             detailsEn: 'Reproduction of the famous Minesweeper game in the console, coded in C. The program dynamically generates a double-entry grid and randomly distributes a defined number of mines based on the difficulty selected by the user. The player can interact by entering coordinates to reveal a square or place a flag.'
@@ -64,8 +64,8 @@ export function Projects() {
             detailsFr: 'Application de cybersécurité personnelle développée en Java et TypeScript. Ce coffre-fort numérique permet le stockage crypté et sécurisé des mots de passe et des identifiants de l\'utilisateur. En complément, l\'application intègre une fonctionnalité AutoFill très pratique qui pré-remplit automatiquement les formulaires de connexion sur les sites web précédemment enregistrés.',
             detailsEn: 'Personal cybersecurity application developed in Java and TypeScript. This digital vault allows the encrypted and secure storage of the user\'s passwords and credentials. In addition, the application incorporates a very convenient AutoFill feature that automatically pre-fills login forms on previously saved websites.'
         },
-        { 
-            id: 'ordo', icon: '📄', bg: 'bg-green-500', titre: 'OrdoRead', tech: 'kotlin', techDisplay: 'Kotlin', type: 'perso', 
+        {
+            id: 'ordo', icon: '📄', logo: '/logo/OrdoReadLogo.png', bg: 'bg-green-500', titre: 'OrdoRead', tech: 'kotlin', techDisplay: 'Kotlin', type: 'perso', 
             descFr: 'Extraction et automatisation de rappels médicaux.', descEn: 'Extraction and automation of medical reminders.',
             detailsFr: 'Application pratique développée en Kotlin pour faciliter le suivi médical au quotidien. Son principe de fonctionnement est d\'utiliser l\'appareil photo pour scanner une ordonnance médicale : l\'application extrait ensuite les données de prescription pour ajouter automatiquement la posologie et les rappels de prise des médicaments directement dans le calendrier du smartphone.',
             detailsEn: 'Practical application developed in Kotlin to facilitate daily medical tracking. Its operating principle is to use the camera to scan a medical prescription: the application then extracts the prescription data to automatically add the dosage and medication reminders directly into the smartphone\'s calendar.'
@@ -77,7 +77,7 @@ export function Projects() {
             detailsEn: 'Intensive development event carried out within the university framework, in close collaboration with students from the MMI (Multimedia and Internet Professions) department. The challenge was to design, mock up, and develop a functional blog site within a very short timeframe, testing our ability to work in a team under pressure.'
         },
         {
-            id: 'gmbmanager', icon: '🗺️', bg: 'bg-amber-500', titre: 'GMB Manager', tech: 'angular python typescript', techDisplay: 'Angular / Python / TypeScript', type: 'perso',
+            id: 'gmbmanager', icon: '🗺️', logo: '/logo/GMBLogo.png', bg: 'bg-amber-500', titre: 'GMB Manager', tech: 'angular python typescript', techDisplay: 'Angular / Python / TypeScript', type: 'perso',
             github: 'https://github.com/Dchirez/GMB_Manager.git',
             descFr: 'Application de gestion des fiches Google My Business.', descEn: 'Google My Business profile management application.',
             detailsFr: 'Application fullstack personnelle conçue pour aider les petits commerces locaux à gérer et optimiser leur présence en ligne via Google My Business. Le frontend utilise Angular 21 avec TypeScript et Tailwind CSS pour une interface moderne et réactive. Le backend repose sur Python Flask pour les traitements métier. L\'application s\'intègre avec Google OAuth 2.0 et la Google Business Profile API pour une gestion authentifiée des fiches commerciales, incluant un système de scoring de complétude de profil (0-100), la gestion des avis clients, et la création de publications.',
@@ -121,7 +121,7 @@ export function Projects() {
 
                 modalBody.innerHTML = `
                     <div class="${project.bg} h-32 md:h-48 flex items-center justify-center relative overflow-hidden">
-                        <div class="text-6xl md:text-8xl">${project.icon}</div>
+                        ${project.logo ? `<img src="${project.logo}" alt="${project.titre} logo" class="h-32 w-32 md:h-48 md:w-48 object-contain" />` : `<div class="text-6xl md:text-8xl">${project.icon}</div>`}
                     </div>
                     <div class="p-8 md:p-10 text-left bg-white dark:bg-gray-800 transition-colors duration-300">
                         <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-6">
@@ -321,7 +321,7 @@ export function Projects() {
             <a href="#" class="block w-full h-full bg-white dark:bg-gray-800 rounded-xl shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700 flex flex-col transition-colors duration-300 group" data-id="${p.id}">
                 <div class="h-2 ${p.bg} shrink-0"></div>
                 <div class="p-4 flex flex-col items-center justify-center flex-grow text-center">
-                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform duration-300">${p.icon}</div>
+                    ${p.logo ? `<img src="${p.logo}" alt="${p.titre} logo" class="h-20 w-20 mb-2 object-contain transform group-hover:scale-110 transition-transform duration-300" />` : `<div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform duration-300">${p.icon}</div>`}
                     <h2 class="text-xl font-bold text-gray-800 dark:text-white group-hover:text-blue-600 transition-colors">${p.titre}</h2>
                     <p class="text-gray-500 dark:text-gray-400 mt-1 text-sm">${p.techDisplay}</p>
                 </div>
@@ -331,14 +331,19 @@ export function Projects() {
 
     const gridCards = projets.map(p => `
         <a href="#" class="open-modal-btn bouton-projet bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 hover:shadow-lg transition cursor-pointer block group" data-type="${p.type}" data-tech="${p.tech}" data-id="${p.id}">
-            <div class="flex justify-between items-start mb-2">
-                <h3 class="text-xl font-bold text-gray-800 dark:text-white group-hover:text-blue-600 transition-colors">${p.titre}</h3>
-                <span class="text-xs font-bold ${p.type === 'univ' ? 'bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300' : 'bg-purple-100 dark:bg-purple-900/50 text-purple-600 dark:text-purple-300'} px-2 py-1 rounded capitalize">
-                    <span class="lang-fr">${p.type === 'univ' ? 'Universitaire' : 'Personnel'}</span>
-                    <span class="lang-en">${p.type === 'univ' ? 'Academic' : 'Personal'}</span>
-                </span>
+            <div class="flex items-start gap-3 mb-3">
+                ${p.logo ? `<img src="${p.logo}" alt="${p.titre} logo" class="h-12 w-12 object-contain flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />` : `<div class="text-3xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300">${p.icon}</div>`}
+                <div class="flex-grow">
+                    <div class="flex justify-between items-start gap-2">
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-white group-hover:text-blue-600 transition-colors">${p.titre}</h3>
+                        <span class="text-xs font-bold ${p.type === 'univ' ? 'bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300' : 'bg-purple-100 dark:bg-purple-900/50 text-purple-600 dark:text-purple-300'} px-2 py-1 rounded capitalize whitespace-nowrap">
+                            <span class="lang-fr">${p.type === 'univ' ? 'Universitaire' : 'Personnel'}</span>
+                            <span class="lang-en">${p.type === 'univ' ? 'Academic' : 'Personal'}</span>
+                        </span>
+                    </div>
+                </div>
             </div>
-            <p class="text-gray-600 dark:text-gray-300 text-sm mt-2 font-semibold">${p.techDisplay}</p>
+            <p class="text-gray-600 dark:text-gray-300 text-sm font-semibold">${p.techDisplay}</p>
             <p class="text-gray-500 dark:text-gray-400 text-sm mt-2">
                 <span class="lang-fr">${p.descFr}</span>
                 <span class="lang-en">${p.descEn}</span>
