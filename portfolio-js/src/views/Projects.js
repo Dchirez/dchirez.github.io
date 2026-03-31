@@ -4,7 +4,9 @@ export function Projects() {
         c: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg',
         web: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg',
         typescript: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg',
-        kotlin: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/kotlin/kotlin-original.svg'
+        kotlin: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/kotlin/kotlin-original.svg',
+        angular: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/angular/angular-original.svg',
+        python: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg'
     };
 
     const projets = [
@@ -68,17 +70,24 @@ export function Projects() {
             detailsFr: 'Application pratique développée en Kotlin pour faciliter le suivi médical au quotidien. Son principe de fonctionnement est d\'utiliser l\'appareil photo pour scanner une ordonnance médicale : l\'application extrait ensuite les données de prescription pour ajouter automatiquement la posologie et les rappels de prise des médicaments directement dans le calendrier du smartphone.',
             detailsEn: 'Practical application developed in Kotlin to facilitate daily medical tracking. Its operating principle is to use the camera to scan a medical prescription: the application then extracts the prescription data to automatically add the dosage and medication reminders directly into the smartphone\'s calendar.'
         },
-        { 
-            id: 'marathon', icon: '💻', bg: 'bg-cyan-500', titre: 'Marathon Web', tech: 'web', techDisplay: 'Web', type: 'univ', 
+        {
+            id: 'marathon', icon: '💻', bg: 'bg-cyan-500', titre: 'Marathon Web', tech: 'web', techDisplay: 'Web', type: 'univ',
             descFr: 'Hackathon interdisciplinaire en développement web.', descEn: 'Interdisciplinary hackathon in web development.',
             detailsFr: 'Événement de développement intensif réalisé dans le cadre universitaire, en étroite collaboration avec des étudiants du département MMI (Métiers du Multimédia et de l\'Internet). Le défi consistait à concevoir, maquetter et développer un site de blog fonctionnel dans un temps imparti très court, mettant à l\'épreuve notre capacité à travailler en équipe sous pression.',
             detailsEn: 'Intensive development event carried out within the university framework, in close collaboration with students from the MMI (Multimedia and Internet Professions) department. The challenge was to design, mock up, and develop a functional blog site within a very short timeframe, testing our ability to work in a team under pressure.'
+        },
+        {
+            id: 'gmbmanager', icon: '🗺️', bg: 'bg-amber-500', titre: 'GMB Manager', tech: 'angular python typescript', techDisplay: 'Angular / Python / TypeScript', type: 'perso',
+            github: 'https://github.com/Dchirez/GMB_Manager.git',
+            descFr: 'Application de gestion des fiches Google My Business.', descEn: 'Google My Business profile management application.',
+            detailsFr: 'Application fullstack personnelle conçue pour aider les petits commerces locaux à gérer et optimiser leur présence en ligne via Google My Business. Le frontend utilise Angular 21 avec TypeScript et Tailwind CSS pour une interface moderne et réactive. Le backend repose sur Python Flask pour les traitements métier. L\'application s\'intègre avec Google OAuth 2.0 et la Google Business Profile API pour une gestion authentifiée des fiches commerciales, incluant un système de scoring de complétude de profil (0-100), la gestion des avis clients, et la création de publications.',
+            detailsEn: 'Personal fullstack application designed to help local businesses manage and optimize their online presence via Google My Business. The frontend uses Angular 21 with TypeScript and Tailwind CSS for a modern and reactive interface. The backend relies on Python Flask for business logic processing. The application integrates with Google OAuth 2.0 and the Google Business Profile API for authenticated business profile management, including a profile completion scoring system (0-100), customer review management, and publication creation.'
         }
     ];
 
     const allTechscomposite = projets.flatMap(p => p.tech.split(' '));
     const uniqueTechs = [...new Set(allTechscomposite)];
-    const techOrder = ['java', 'c', 'web', 'typescript', 'kotlin']; 
+    const techOrder = ['java', 'c', 'web', 'typescript', 'kotlin', 'angular', 'python'];
     const orderedUniqueTechs = techOrder.filter(t => uniqueTechs.includes(t));
 
     setTimeout(() => {
@@ -102,6 +111,14 @@ export function Projects() {
                     `;
                 }).join('');
 
+                const githubLink = project.github ? `
+                    <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 mt-6 bg-gray-900 dark:bg-gray-700 text-white rounded-lg hover:bg-gray-800 dark:hover:bg-gray-600 transition-colors font-semibold">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        <span class="lang-fr">Voir sur GitHub</span>
+                        <span class="lang-en">View on GitHub</span>
+                    </a>
+                ` : '';
+
                 modalBody.innerHTML = `
                     <div class="${project.bg} h-32 md:h-48 flex items-center justify-center relative overflow-hidden">
                         <div class="text-6xl md:text-8xl">${project.icon}</div>
@@ -122,6 +139,7 @@ export function Projects() {
                                 <span class="lang-fr">${project.detailsFr}</span>
                                 <span class="lang-en">${project.detailsEn}</span>
                             </p>
+                            ${githubLink}
                         </div>
                     </div>
                 `;
