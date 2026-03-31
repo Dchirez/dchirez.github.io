@@ -72,9 +72,9 @@ function updateScrollProgress() {
 }
 
 function handleNavigation() {
-    let path = window.location.hash.replace('#', '');
-    if (!path || path === '') path = '/';
-    
+    let path = window.location.pathname;
+    if (!path || path === '/' || path === '') path = '/';
+
     const view = router[path] || router['/'];
     if (typeof view === 'function') {
         renderLayout(view());
@@ -82,11 +82,28 @@ function handleNavigation() {
     } else {
         renderLayout('<h2 class="text-center py-20 text-2xl dark:text-white"><span class="lang-fr">Erreur 404 - Vue introuvable</span><span class="lang-en">Error 404 - View not found</span></h2>');
     }
-    
+
     setTimeout(updateScrollProgress, 50);
 }
 
 document.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (link) {
+        const href = link.getAttribute('href');
+        // Intercepter les liens internes
+        if (href && href.startsWith('/') && !link.target) {
+            e.preventDefault();
+            window.history.pushState({}, '', href);
+            handleNavigation();
+
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
+            return;
+        }
+    }
+
     const burgerBtn = e.target.closest('#burger-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
 
@@ -102,7 +119,7 @@ document.addEventListener('click', (e) => {
 
 window.addEventListener('scroll', updateScrollProgress);
 window.addEventListener('resize', updateScrollProgress);
-window.addEventListener('hashchange', handleNavigation);
+window.addEventListener('popstate', handleNavigation);
 window.addEventListener('load', handleNavigation);
 
 handleNavigation();

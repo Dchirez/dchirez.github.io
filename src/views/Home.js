@@ -13,10 +13,10 @@ export function Home() {
                 <span class="lang-en">Computer Science student, I am looking for an IT Development internship starting mid-April 2026.</span>
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#/projets" class="px-8 py-3 rounded-full bg-blue-600 text-white font-bold hover:bg-blue-700 transition shadow-lg">
+                <a href="/projets" class="px-8 py-3 rounded-full bg-blue-600 text-white font-bold hover:bg-blue-700 transition shadow-lg">
                     <span class="lang-fr">Découvrir mes projets</span><span class="lang-en">Discover my projects</span>
                 </a>
-                <a href="#/contact" class="px-8 py-3 rounded-full border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-bold bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+                <a href="/contact" class="px-8 py-3 rounded-full border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-bold bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition">
                     <span class="lang-fr">Me contacter</span><span class="lang-en">Contact me</span>
                 </a>
             </div>
