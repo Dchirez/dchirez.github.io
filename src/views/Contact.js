@@ -84,7 +84,6 @@ export function Contact() {
             <!-- Informations de Contact Alternatives -->
             <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
                 <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 text-center">
-                    <span class="lang-fr">Ou contactez-moi directement :</span><span class="lang-en">Or contact me directly:</span>
                 </p>
             </div>
         </div>
