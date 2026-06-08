@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Damien Chirez — CV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" type="image/png" href="/logo/Favicon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/ds.css">
+<style>
+  :root{ --cv-max:940px; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:var(--font-sans);
+    background:
+      radial-gradient(60% 50% at 12% 0%, var(--accent-soft) 0%, transparent 55%),
+      radial-gradient(55% 45% at 92% 100%, var(--accent-2-soft) 0%, transparent 55%),
+      var(--bg-page);
+    color:var(--text-body);line-height:1.5;padding:34px 18px 64px;min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--selection-bg)}
+
+  /* toolbar */
+  .toolbar{max-width:var(--cv-max);margin:0 auto 22px;display:flex;justify-content:flex-end;gap:12px;align-items:center}
+  .lang-switch{display:inline-flex;background:var(--surface-card);border:1px solid var(--border);border-radius:var(--radius-pill);padding:4px;box-shadow:var(--shadow-xs)}
+  .lang-switch button{font-family:var(--font-mono);font-weight:600;font-size:12px;letter-spacing:.04em;border:none;background:transparent;color:var(--text-muted);padding:8px 16px;border-radius:var(--radius-pill);cursor:pointer;transition:.25s}
+  .lang-switch button.active{background:var(--brand-gradient);color:#fff;box-shadow:var(--shadow-accent)}
+  .print-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-sans);font-weight:600;font-size:14px;border:1.5px solid var(--border-strong);background:var(--surface-card);color:var(--text-strong);padding:9px 18px;border-radius:var(--radius-pill);cursor:pointer;transition:.2s}
+  .print-btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+
+  /* sheet */
+  .sheet{max-width:var(--cv-max);margin:0 auto;background:var(--surface-card);border:1px solid var(--border);border-radius:var(--radius-xl);overflow:hidden;display:grid;grid-template-columns:300px 1fr;box-shadow:var(--shadow-lg);animation:rise .7s var(--ease-out) both}
+  @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+  /* sidebar */
+  .side{background:var(--surface-sunken);border-right:1px solid var(--border);padding:38px 26px 40px;position:relative}
+  .avatar-wrap{position:relative;width:128px;height:128px;margin:0 auto 22px;border-radius:50%;background:var(--brand-gradient);padding:3px;box-shadow:var(--shadow-accent)}
+  .avatar{width:100%;height:100%;border-radius:50%;background:#ffffff;overflow:hidden;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:40px;letter-spacing:.01em;color:var(--accent)}
+  .avatar img{width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;display:block}
+  .avatar-wrap::after{content:"";position:absolute;bottom:7px;right:7px;width:20px;height:20px;border-radius:50%;background:var(--status-online);border:3px solid var(--surface-sunken)}
+
+  .side h2{font-family:var(--font-display);font-weight:700;font-size:20px;text-align:center;color:var(--text-strong)}
+  .side .role{text-align:center;color:var(--accent);font-family:var(--font-mono);font-size:11px;font-weight:500;margin-top:6px;margin-bottom:26px;text-transform:uppercase;letter-spacing:.14em}
+
+  .side-block{margin-bottom:24px}
+  .side-block h3{font-family:var(--font-mono);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--text-strong);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .side-block h3::before{content:"";width:14px;height:2px;background:var(--accent);border-radius:2px}
+
+  .contact-line{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--text-muted);margin-bottom:9px;word-break:break-word}
+  .contact-line svg{flex-shrink:0;margin-top:2px;color:var(--accent)}
+  .contact-line a{color:var(--text-muted);text-decoration:none;transition:.2s}
+  .contact-line a:hover{color:var(--accent)}
+
+  .tag-row{display:flex;flex-wrap:wrap;gap:6px}
+  .tag{font-family:var(--font-mono);font-size:11px;background:var(--surface-card);color:var(--text-body);padding:5px 10px;border-radius:var(--radius-sm);border:1px solid var(--border)}
+
+  .lang-item{margin-bottom:11px}
+  .lang-item .lang-top{display:flex;justify-content:space-between;font-size:13px;color:var(--text-body);margin-bottom:6px}
+  .lang-item .lang-top span:last-child{color:var(--text-faint);font-family:var(--font-mono);font-size:11px}
+  .dots{display:flex;gap:5px}
+  .dots i{width:8px;height:8px;border-radius:50%;background:var(--border-strong)}
+  .dots i.on{background:var(--accent)}
+
+  .interest-list{list-style:none;font-size:13px;color:var(--text-muted)}
+  .interest-list li{display:flex;gap:9px;align-items:center;margin-bottom:8px}
+  .interest-list li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+
+  .qr-block{margin-top:4px;text-align:center}
+  .qr-card{display:inline-block;background:var(--surface-card);padding:10px;border-radius:var(--radius-md);border:1px solid var(--border);box-shadow:var(--shadow-sm);cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s}
+  .qr-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:var(--border-accent)}
+  .qr-card img{display:block;width:110px;height:110px;border-radius:4px}
+  .qr-block .qr-label{font-family:var(--font-mono);font-size:11px;color:var(--text-faint);margin-top:9px}
+  .qr-block .qr-label b{color:var(--accent);font-weight:600}
+
+  /* main */
+  .main{padding:42px 44px 46px}
+  .head{margin-bottom:30px}
+  .head .name{font-family:var(--font-display);font-weight:700;font-size:36px;letter-spacing:-.02em;line-height:1.04;color:var(--text-strong)}
+  .head .name b{color:var(--accent);font-weight:700}
+  .head .title{font-family:var(--font-sans);font-weight:600;font-size:16px;color:var(--accent);margin-top:10px}
+  .head .intro{font-size:13.5px;color:var(--text-muted);margin-top:14px;max-width:52ch;border-left:3px solid var(--accent);padding-left:14px;line-height:1.6}
+
+  .strengths{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:30px}
+  .strength{background:var(--surface-sunken);border:1px solid var(--border);border-radius:var(--radius-md);padding:15px 14px;position:relative;overflow:hidden}
+  .strength .s-ic{width:28px;height:28px;border-radius:var(--radius-sm);background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+  .strength .s-name{font-family:var(--font-display);font-weight:600;font-size:13px;margin-bottom:4px;color:var(--text-strong)}
+  .strength .s-desc{font-size:11px;color:var(--text-muted);line-height:1.45}
+
+  section.block{margin-bottom:30px}
+  .sec-title{font-family:var(--font-display);font-weight:700;font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-strong);display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .sec-title::after{content:"";flex:1;height:1.5px;background:linear-gradient(90deg,var(--border-strong),transparent)}
+  .sec-title .ic{width:30px;height:30px;border-radius:var(--radius-sm);background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+  .timeline{position:relative;padding-left:22px}
+  .timeline::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:var(--border-strong)}
+  .entry{position:relative;margin-bottom:18px}
+  .entry::before{content:"";position:absolute;left:-22px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--surface-card);border:3px solid var(--accent)}
+  .entry .e-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+  .entry h4{font-family:var(--font-display);font-weight:600;font-size:14.5px;color:var(--text-strong)}
+  .entry .e-date{font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--accent);background:var(--accent-soft);padding:3px 9px;border-radius:var(--radius-sm);white-space:nowrap}
+  .entry .e-org{font-size:12.5px;color:var(--text-muted);margin:3px 0 4px}
+  .entry .e-org b{color:var(--text-body);font-weight:600}
+  .entry ul{list-style:none;font-size:12.5px;color:var(--text-muted)}
+  .entry ul li{position:relative;padding-left:14px;margin-bottom:3px}
+  .entry ul li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+  .entry p.e-desc{font-size:12.5px;color:var(--text-muted)}
+
+  .proj-group{margin-bottom:16px}
+  .proj-group .pg-label{font-family:var(--font-mono);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:9px}
+  .proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .proj{background:var(--surface-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:12px 14px;transition:.2s}
+  .proj:hover{border-color:var(--border-accent);transform:translateY(-2px);box-shadow:var(--shadow-md)}
+  .proj .p-name{font-family:var(--font-display);font-weight:600;font-size:12.5px;color:var(--text-strong);margin-bottom:3px}
+  .proj .p-desc{font-size:11px;color:var(--text-muted);line-height:1.45}
+  .proj .p-stack{margin-top:8px;display:flex;flex-wrap:wrap;gap:4px}
+  .proj .p-stack span{font-family:var(--font-mono);font-size:9.5px;font-weight:500;background:var(--surface-sunken);border:1px solid var(--border);color:var(--text-muted);padding:2px 7px;border-radius:5px}
+
+  [data-en]{display:none}
+  body.en [data-fr]{display:none}
+  body.en [data-en]{display:revert}
+
+  @media (max-width:720px){
+    .sheet{grid-template-columns:1fr}
+    .side{border-right:none;border-bottom:1px solid var(--border)}
+    .main{padding:32px 24px}
+    .proj-grid{grid-template-columns:1fr}
+    .strengths{grid-template-columns:1fr}
+    .head .name{font-size:28px}
+  }
+  @media print{
+    body{background:#fff;padding:0}
+    .toolbar{display:none}
+    .sheet{box-shadow:none;border-radius:0;max-width:100%;animation:none;border:none}
+    .proj:hover,.entry:hover{transform:none}
+  }
+</style>
+</head>
+<body class="fr">
+
+  <div class="toolbar">
+    <div class="lang-switch">
+      <button id="btn-fr" class="active" onclick="setLang('fr')">Français</button>
+      <button id="btn-en" onclick="setLang('en')">English</button>
+    </div>
+    <button class="print-btn" onclick="window.print()">
+      <span data-fr>Imprimer / PDF</span><span data-en>Print / PDF</span>
+    </button>
+  </div>
+
+  <div class="sheet">
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="side">
+      <div class="avatar-wrap"><div class="avatar"><img src="avatar.png" alt="Damien Chirez"></div></div>
+      <h2>Damien Chirez</h2>
+      <p class="role">
+        <span data-fr>Développeur · Étudiant</span>
+        <span data-en>Developer · Student</span>
+      </p>
+
+      <!-- Contact -->
+      <div class="side-block">
+        <h3><span data-fr>Contact</span><span data-en>Contact</span></h3>
+        <div class="contact-line">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+          <a href="mailto:dchirez59@gmail.com">dchirez59@gmail.com</a>
+        </div>
+        <div class="contact-line">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          06 43 24 62 91
+        </div>
+        <div class="contact-line">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span><span data-fr>Portfolio : </span><span data-en>Portfolio: </span><a href="https://dchirez.fr" target="_blank" rel="noopener">dchirez.fr</a></span>
+        </div>
+        <div class="contact-line">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>62320 Rouvroy<br><span data-fr>Mobilité : Lille, Dunkerque, Lens</span><span data-en>Mobility: Lille, Dunkerque, Lens</span></span>
+        </div>
+        <div class="contact-line">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20"/></svg>
+          <span><span data-fr>Nationalité française</span><span data-en>French nationality</span> · <span data-fr>19 ans</span><span data-en>19 y.o.</span></span>
+        </div>
+      </div>
+
+      <!-- Programming -->
+      <div class="side-block">
+        <h3><span data-fr>Programmation</span><span data-en>Programming</span></h3>
+        <div class="tag-row">
+          <span class="tag">Java</span>
+          <span class="tag">Python</span>
+          <span class="tag">PHP</span>
+          <span class="tag">Symfony</span>
+          <span class="tag">Laravel</span>
+          <span class="tag">HTML / CSS</span>
+          <span class="tag">SQL / PSQL</span>
+          <span class="tag">C</span>
+          <span class="tag"><span data-fr>Réseaux & systèmes</span><span data-en>Networks & systems</span></span>
+        </div>
+      </div>
+
+      <!-- Tools -->
+      <div class="side-block">
+        <h3><span data-fr>Outils</span><span data-en>Tools</span></h3>
+        <div class="tag-row">
+          <span class="tag">Git</span>
+          <span class="tag">JetBrains</span>
+          <span class="tag">VS Code</span>
+          <span class="tag">Gradle</span>
+          <span class="tag">SQLite</span>
+          <span class="tag">Bruno</span>
+        </div>
+      </div>
+
+      <!-- Languages -->
+      <div class="side-block">
+        <h3><span data-fr>Langues</span><span data-en>Languages</span></h3>
+        <div class="lang-item">
+          <div class="lang-top"><span data-fr>Français</span><span data-en hidden>French</span><span data-fr>Langue maternelle</span><span data-en hidden>Native</span></div>
+          <div class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-top"><span data-fr>Anglais</span><span data-en hidden>English</span><span>B2+</span></div>
+          <div class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-top"><span data-fr>Espagnol</span><span data-en hidden>Spanish</span><span>B1</span></div>
+          <div class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+        </div>
+      </div>
+
+      <!-- Interests -->
+      <div class="side-block">
+        <h3><span data-fr>Centres d'intérêt</span><span data-en>Interests</span></h3>
+        <ul class="interest-list">
+          <li><span data-fr>IA & nouvelles technologies</span><span data-en>AI & new technologies</span></li>
+          <li><span data-fr>Basket en compétition</span><span data-en>Competitive basketball</span></li>
+          <li><span data-fr>Escalade (5 ans)</span><span data-en>Climbing (5 years)</span></li>
+          <li><span data-fr>Informatique en général</span><span data-en>Computing in general</span></li>
+        </ul>
+      </div>
+
+      <!-- QR code -->
+      <div class="side-block qr-block">
+        <h3><span data-fr>GitHub</span><span data-en>GitHub</span></h3>
+        <a class="qr-card" href="https://github.com/Dchirez?tab=repositories" target="_blank" rel="noopener" aria-label="GitHub Damien Chirez"><img src="data:image/png;base64,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" alt="QR code GitHub Damien Chirez"></a>
+        <p class="qr-label"><span data-fr>Scannez pour mon </span><span data-en>Scan for my </span><b>GitHub</b></p>
+      </div>
+    </aside>
+
+    <!-- ============ MAIN ============ -->
+    <main class="main">
+      <header class="head">
+        <h1 class="name">Damien <b>Chirez</b></h1>
+        <p class="title">
+          <span data-fr>Alternance en développement informatique — dès septembre 2026</span>
+          <span data-en>Work-Study in Software Development — from September 2026</span>
+        </p>
+        <p class="intro">
+          <span data-fr>Étudiant en informatique à la recherche d'une alternance en développement à partir de septembre 2026. Au-delà de la technique, mes expériences variées (restauration, logistique, vie associative) m'ont forgé un vrai sens du contact, de la rigueur sous pression et du travail en équipe — des atouts rares chez un profil technique.</span>
+          <span data-en>Computer science student looking for a work-study contract in development starting September 2026. Beyond the technical side, my diverse experiences (hospitality, logistics, student life) have given me real interpersonal skills, composure under pressure and teamwork — assets that are rare in a technical profile.</span>
+        </p>
+      </header>
+
+      <!-- Strengths -->
+      <div class="strengths">
+        <div class="strength">
+          <div class="s-ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <p class="s-name"><span data-fr>Esprit d'équipe</span><span data-en>Teamwork</span></p>
+          <p class="s-desc"><span data-fr>Forgé en restauration, en logistique et au sein du BDE.</span><span data-en>Built in hospitality, logistics and the student union.</span></p>
+        </div>
+        <div class="strength">
+          <div class="s-ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div>
+          <p class="s-name"><span data-fr>Sang-froid</span><span data-en>Composure</span></p>
+          <p class="s-desc"><span data-fr>Habitué aux rythmes soutenus et à la pression du service.</span><span data-en>Used to fast pace and the pressure of service.</span></p>
+        </div>
+        <div class="strength">
+          <div class="s-ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></svg></div>
+          <p class="s-name"><span data-fr>Sens du contact</span><span data-en>People skills</span></p>
+          <p class="s-desc"><span data-fr>Relation client et communication avec les entreprises.</span><span data-en>Customer relations and corporate communication.</span></p>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <section class="block">
+        <h2 class="sec-title">
+          <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
+          <span data-fr>Diplômes & Formations</span><span data-en>Education</span>
+        </h2>
+        <div class="timeline">
+          <div class="entry">
+            <div class="e-head">
+              <h4><span data-fr>2ᵉ année de BUT Informatique</span><span data-en>2nd year — BUT Computer Science</span></h4>
+              <span class="e-date">2025 – 2026</span>
+            </div>
+            <p class="e-org"><b>IUT de Lens</b> — <span data-fr>1ʳᵉ année validée</span><span data-en>1st year completed</span></p>
+          </div>
+          <div class="entry">
+            <div class="e-head">
+              <h4><span data-fr>Baccalauréat Général</span><span data-en>French High School Diploma (Baccalauréat)</span></h4>
+              <span class="e-date">2024 – 2025</span>
+            </div>
+            <p class="e-org"><b>Lycée Jean Bart, Dunkerque</b></p>
+            <p class="e-desc"><span data-fr>Spécialités Mathématiques · Numérique et Sciences de l'Informatique</span><span data-en>Majors: Mathematics · Digital & Computer Sciences</span></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience -->
+      <section class="block">
+        <h2 class="sec-title">
+          <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
+          <span data-fr>Expériences professionnelles</span><span data-en>Work Experience</span>
+        </h2>
+        <div class="timeline">
+          <div class="entry">
+            <div class="e-head">
+              <h4><span data-fr>Stage Développeur</span><span data-en>Developer Intern</span></h4>
+              <span class="e-date"><span data-fr>Mai – Juil. 2026</span><span data-en hidden>May – Jul 2026</span></span>
+            </div>
+            <p class="e-org"><b>Opalia</b>, Bourbourg — <span data-fr>Stage de 8 semaines</span><span data-en>8-week internship</span></p>
+            <ul>
+              <li><span data-fr>Développement de sites et d'applications</span><span data-en>Website and application development</span></li>
+              <li><span data-fr>Maintenance applicative</span><span data-en>Application maintenance</span></li>
+              <li><span data-fr>Travail en équipe</span><span data-en>Teamwork</span></li>
+            </ul>
+          </div>
+          <div class="entry">
+            <div class="e-head">
+              <h4><span data-fr>Magasinier</span><span data-en>Warehouse Operator</span></h4>
+              <span class="e-date"><span data-fr>Juillet 2025</span><span data-en hidden>July 2025</span></span>
+            </div>
+            <p class="e-org"><b>DILLINGER</b> — <span data-fr>Site ArcelorMittal, Dunkerque</span><span data-en>ArcelorMittal site, Dunkerque</span></p>
+            <p class="e-desc"><span data-fr>Gestion du magasin interne de l'usine.</span><span data-en>Management of the plant's internal warehouse.</span></p>
+          </div>
+          <div class="entry">
+            <div class="e-head">
+              <h4><span data-fr>Membre du BDE</span><span data-en>Student Union Member</span></h4>
+              <span class="e-date">2024 – 2026</span>
+            </div>
+            <p class="e-org"><b>BDE Reborn</b> — IUT de Lens</p>
+            <ul>
+              <li><span data-fr>Chargé de communication avec les entreprises externes</span><span data-en>In charge of communication with external companies</span></li>
+              <li><span data-fr>Organisation d'évènements (journée d'intégration)</span><span data-en>Event organisation (welcome day)</span></li>
+            </ul>
+          </div>
+          <div class="entry">
+            <div class="e-head">
+              <h4><span data-fr>Serveur en restauration</span><span data-en>Waiter</span></h4>
+              <span class="e-date"><span data-fr>Avr. – Juil. 2024</span><span data-en hidden>Apr – Jul 2024</span></span>
+            </div>
+            <p class="e-org"><b>Le Sicilien</b>, Dunkerque</p>
+            <ul>
+              <li><span data-fr>Contact avec la clientèle</span><span data-en>Customer relations</span></li>
+              <li><span data-fr>Gestion de caisse, service et gestion de salle</span><span data-en>Till handling, service and floor management</span></li>
+            </ul>
+          </div>
+          <div class="entry">
+            <div class="e-head">
+              <h4><span data-fr>Équipier en restauration rapide</span><span data-en>Fast-food Crew Member</span></h4>
+              <span class="e-date">2023</span>
+            </div>
+            <p class="e-org"><b>Plopsaland</b>, La Panne (<span data-fr>Belgique</span><span data-en>Belgium</span>)</p>
+            <p class="e-desc"><span data-fr>Travail à rythme soutenu sur de longues périodes.</span><span data-en>Fast-paced work over long shifts.</span></p>
+          </div>
+          <div class="entry">
+            <div class="e-head">
+              <h4><span data-fr>Bénévole au club d'escalade</span><span data-en>Climbing Club Volunteer</span></h4>
+              <span class="e-date">2021 – 2022</span>
+            </div>
+            <p class="e-org"><b><span data-fr>Club d'Escalade</span><span data-en>Climbing Club</span></b>, Dunkerque</p>
+            <p class="e-desc"><span data-fr>Encadrement de cours pour des enfants de 8 à 10 ans.</span><span data-en>Coaching classes for children aged 8 to 10.</span></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section class="block">
+        <h2 class="sec-title">
+          <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
+          <span data-fr>Mes Projets</span><span data-en>Projects</span>
+        </h2>
+
+        <div class="proj-group">
+          <p class="pg-label"><span data-fr>Projets universitaires</span><span data-en>University projects</span></p>
+          <div class="proj-grid">
+            <div class="proj">
+              <p class="p-name"><span data-fr>Site web</span><span data-en>Website</span></p>
+              <p class="p-desc"><span data-fr>Création d'un site statique.</span><span data-en>Building a static website.</span></p>
+              <div class="p-stack"><span>HTML</span><span>CSS</span></div>
+            </div>
+            <div class="proj">
+              <p class="p-name">Pac-Man</p>
+              <p class="p-desc"><span data-fr>Reproduction du jeu Pac-Man.</span><span data-en>Recreation of the Pac-Man game.</span></p>
+              <div class="p-stack"><span>JavaFX</span><span>Gradle</span></div>
+            </div>
+            <div class="proj">
+              <p class="p-name"><span data-fr>Lecteur .xml</span><span data-en>.xml Reader</span></p>
+              <p class="p-desc"><span data-fr>Lecteur de fichiers XML.</span><span data-en>XML file parser.</span></p>
+              <div class="p-stack"><span>Java</span></div>
+            </div>
+            <div class="proj">
+              <p class="p-name"><span data-fr>Site de blog</span><span data-en>Blog website</span></p>
+              <p class="p-desc"><span data-fr>Blog complet avec base de données.</span><span data-en>Full blog with database.</span></p>
+              <div class="p-stack"><span>PHP</span><span>Laravel</span><span>SQLite</span><span>Git</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-group">
+          <p class="pg-label"><span data-fr>Projets personnels</span><span data-en>Personal projects</span></p>
+          <div class="proj-grid">
+            <div class="proj">
+              <p class="p-name"><span data-fr>Coffre-Fort</span><span data-en>Password Vault</span></p>
+              <p class="p-desc"><span data-fr>Stockage crypté des identifiants + auto-remplissage des formulaires.</span><span data-en>Encrypted credential storage + form auto-fill.</span></p>
+              <div class="p-stack"><span>Java</span><span>TypeScript</span></div>
+            </div>
+            <div class="proj">
+              <p class="p-name"><span data-fr>Scanner d'ordonnance</span><span data-en>Prescription Scanner</span></p>
+              <p class="p-desc"><span data-fr>Scan d'ordonnances et ajout au calendrier des prises.</span><span data-en>Scans prescriptions and adds intake to calendar.</span></p>
+              <div class="p-stack"><span>Kotlin</span></div>
+            </div>
+            <div class="proj">
+              <p class="p-name"><span data-fr>Mini-jeux en C</span><span data-en>C Mini-games</span></p>
+              <p class="p-desc"><span data-fr>Démineur, Quizz, Juste Prix, Bataille Navale.</span><span data-en>Minesweeper, Quiz, Price-guessing, Battleship.</span></p>
+              <div class="p-stack"><span>C</span></div>
+            </div>
+            <div class="proj">
+              <p class="p-name">Portfolio</p>
+              <p class="p-desc"><span data-fr>Portfolio personnel (en cours).</span><span data-en>Personal portfolio (in progress).</span></p>
+              <div class="p-stack"><span>JavaScript</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+<script>
+  function setLang(l){
+    document.body.classList.toggle('en', l==='en');
+    document.documentElement.lang = l;
+    document.getElementById('btn-fr').classList.toggle('active', l==='fr');
+    document.getElementById('btn-en').classList.toggle('active', l==='en');
+    // fix the hidden attribute used to keep skill labels tidy
+    document.querySelectorAll('[data-en][hidden]').forEach(e=>e.hidden=false);
+  }
+  // animate skill bars on load
+  window.addEventListener('load',()=>{
+    document.querySelectorAll('.bar i').forEach(b=>{
+      setTimeout(()=>{b.style.width=b.dataset.w+'%'},250);
+    });
+  });
+  // remove the hidden attr immediately so EN labels appear when toggled
+  document.querySelectorAll('[data-en][hidden]').forEach(e=>e.removeAttribute('hidden'));
+</script>
+</body>
+</html>

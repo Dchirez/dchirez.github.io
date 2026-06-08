@@ -1,0 +1,111 @@
+/* ============================================================
+   UI primitives + globe + coverflow
+   (classes that replace the prototype's inline JSX styles)
+   ============================================================ */
+
+/* ---------- Button ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  font-family: var(--font-sans); font-weight: 600; line-height: 1;
+  border-radius: var(--radius-pill); cursor: pointer; white-space: nowrap;
+  text-decoration: none; border: 1.5px solid transparent;
+  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-base), background var(--dur-base), border-color var(--dur-base);
+}
+.btn-i { display: inline-flex; }
+.btn-full { width: 100%; }
+.btn-sm { height: 38px; padding: 0 16px; font-size: 14px; }
+.btn-md { height: 48px; padding: 0 22px; font-size: 16px; }
+.btn-lg { height: 56px; padding: 0 30px; font-size: 18px; }
+
+.btn-gradient { background: var(--brand-gradient); color: #fff; box-shadow: var(--shadow-accent); }
+.btn-gradient:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.btn-primary { background: var(--accent); color: var(--accent-on); }
+.btn-primary:hover { transform: translateY(-2px); background: var(--accent-hover); }
+.btn-secondary { background: var(--surface-card); color: var(--text-strong); border-color: var(--border-strong); }
+.btn-secondary:hover { transform: translateY(-2px); border-color: var(--accent); }
+.btn-ghost { background: transparent; color: var(--text-body); }
+.btn-ghost:hover { transform: translateY(-2px); background: var(--surface-sunken); }
+
+/* ---------- Badge ---------- */
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--font-mono); font-weight: 500; letter-spacing: 0.04em;
+  text-transform: uppercase; border-radius: var(--radius-pill); line-height: 1; white-space: nowrap;
+}
+.badge-sm { font-size: 11px; padding: 3px 9px; }
+.badge-md { font-size: 12px; padding: 5px 12px; }
+.badge-accent  { background: var(--accent-soft); color: var(--accent); }
+.badge-violet  { background: var(--accent-2-soft); color: var(--accent-2); }
+.badge-neutral { background: var(--surface-sunken); color: var(--text-muted); }
+.badge-outline { background: transparent; color: var(--text-body); border: 1px solid var(--border-strong); }
+.badge-success { background: rgba(22, 163, 74, 0.13); color: var(--green-500); }
+
+/* ---------- StatusPill ---------- */
+.status-pill {
+  display: inline-flex; align-items: center; gap: 9px; padding: 7px 15px 7px 13px;
+  border-radius: var(--radius-pill); background: var(--surface-card); border: 1px solid var(--border);
+  box-shadow: var(--shadow-xs); font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.03em; color: var(--text-body); white-space: nowrap;
+}
+.status-dot { position: relative; display: inline-flex; width: 9px; height: 9px; }
+.status-dot-ping { position: absolute; inset: 0; border-radius: 50%; background: var(--status-online); animation: kit-ping 1.8s var(--ease-out) infinite; opacity: 0.7; }
+.status-dot-core { position: relative; width: 9px; height: 9px; border-radius: 50%; background: var(--status-online); }
+
+/* ---------- TechBadge ---------- */
+.tech-badge {
+  display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px;
+  border-radius: var(--radius-sm); background: var(--surface-card); border: 1px solid var(--border);
+  font-family: var(--font-mono); font-size: 12px; font-weight: 500; color: var(--text-body);
+  transition: all var(--dur-base) var(--ease-out);
+}
+.tech-badge-lg { padding: 9px 15px; font-size: 14px; }
+.tech-badge.is-interactive { cursor: pointer; }
+.tech-badge.is-interactive:hover { transform: translateY(-2px); border-color: var(--border-accent); }
+
+/* ---------- TechGlobe ---------- */
+.globe-scene { cursor: grab; user-select: none; touch-action: none; display: flex; align-items: center; justify-content: center; }
+.globe-sphere { position: relative; width: 0; height: 0; transform-style: preserve-3d; }
+.globe-item { position: absolute; transform-style: preserve-3d; }
+.globe-tile {
+  border-radius: var(--radius-md); background: var(--surface-card); border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm); display: flex; align-items: center; justify-content: center;
+}
+.globe-tile img { pointer-events: none; }
+
+/* ---------- Coverflow ---------- */
+.coverflow { display: flex; align-items: center; justify-content: center; gap: 16px; }
+.cf-viewport { flex: 1; height: 300px; perspective: 1400px; position: relative; }
+.cf-stage { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform 0.8s var(--ease-out); }
+.cf-card {
+  position: absolute; left: 50%; top: 50%; width: 300px; height: 220px;
+  margin-left: -150px; margin-top: -110px; cursor: pointer; transition: opacity 0.6s;
+}
+.cf-inner {
+  width: 100%; height: 100%; background: var(--surface-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); display: flex; flex-direction: column;
+  align-items: center; justify-content: center; padding: 20px; text-align: center; overflow: hidden;
+  transition: border-color var(--dur-base), box-shadow var(--dur-base);
+}
+.cf-card.is-active .cf-inner { border-color: var(--border-accent); box-shadow: var(--shadow-lg); }
+.cf-logo {
+  width: 84px; height: 84px; border-radius: var(--radius-md); background: var(--surface-sunken);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 14px; overflow: hidden;
+}
+.cf-title { font-family: var(--font-display); font-weight: 700; font-size: var(--text-xl); color: var(--text-strong); }
+.cf-tech { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+
+/* ---------- Misc kit pieces ---------- */
+.nav-cta { margin-left: 4px; display: inline-flex; gap: 10px; }
+.modal-logo {
+  width: 88px; height: 88px; border-radius: var(--radius-lg); background: var(--surface-card);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  box-shadow: var(--shadow-sm); overflow: hidden;
+}
+.contact-sent { text-align: center; padding: 30px 0; }
+.proj-empty { text-align: center; color: var(--text-faint); margin-top: 30px; font-family: var(--font-mono); }
+
+@media (max-width: 560px) {
+  .nav-links { display: none; }
+  .nav-cta .btn-secondary { display: none; }
+  .contact-row { grid-template-columns: 1fr !important; }
+}

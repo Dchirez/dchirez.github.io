@@ -1,108 +1,106 @@
-import { router } from './router.js';
-import { renderNav } from './components/Nav.js';
+/* App entry — composes the single-page Éditorial portfolio in vanilla JS.
+   Handles language, theme, the tech globes, projects interactivity,
+   the contact form (Formspree) and the scroll-progress bar. */
+import './styles/styles.css';
+import { PORTFOLIO } from './data.js';
+import { STR } from './i18n.js';
+import { Ic } from './ui.js';
+import { mountGlobe } from './components/globe.js';
+import { initProjects, projectsSectionHTML } from './components/projects.js';
+import {
+  navHTML, heroHTML, skillsHTML, flagshipHTML,
+  formationsHTML, contactHTML, footerHTML,
+} from './components/sections.js';
 
-const app = document.getElementById('app');
+const app = document.getElementById('root');
 
-function renderLayout(content) {
-    if (!app) return;
-    app.innerHTML = `
-        ${renderNav()}
-        <div class="pt-20 flex-grow flex flex-col w-full">
-            ${content}
-        </div>
-        <footer class="bg-gray-800 dark:bg-black text-gray-300 py-8 border-t-4 border-blue-600 mt-auto w-full transition-colors duration-300">
-            <div class="container mx-auto px-4 text-center text-sm">
-                <span class="lang-fr">&copy; 2026 Damien CHIREZ. Tous droits réservés.</span>
-                <span class="lang-en">&copy; 2026 Damien CHIREZ. All rights reserved.</span>
-            </div>
-        </footer>
-    `;
-    setupLanguage();
+const state = {
+  lang: localStorage.getItem('pf-lang') || 'fr',
+  theme: localStorage.getItem('pf-theme') || 'light',
+};
+
+let globeCleanups = [];
+
+function applyTheme() {
+  document.documentElement.classList.toggle('dark', state.theme === 'dark');
+  localStorage.setItem('pf-theme', state.theme);
 }
 
-function setupTheme() {
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
-    } else {
-        document.documentElement.classList.remove('dark');
-    }
-
-    const themeBtn = document.getElementById('theme-toggle-btn');
-    if (themeBtn) {
-        themeBtn.addEventListener('click', () => {
-            document.documentElement.classList.toggle('dark');
-            if (document.documentElement.classList.contains('dark')) {
-                localStorage.theme = 'dark';
-            } else {
-                localStorage.theme = 'light';
-            }
-        });
-    }
+function teardownGlobes() {
+  globeCleanups.forEach((fn) => fn());
+  globeCleanups = [];
 }
 
-function setupLanguage() {
-    let currentLang = localStorage.getItem('language') || 'fr';
-    document.body.classList.remove('fr', 'en');
-    document.body.classList.add(currentLang);
+function render() {
+  const t = STR[state.lang];
+  const lang = state.lang;
+  document.documentElement.lang = lang;
 
-    const langBtns = document.querySelectorAll('.lang-toggle-btn');
-    langBtns.forEach(btn => {
-        btn.innerText = currentLang === 'fr' ? 'EN' : 'FR';
-        const newBtn = btn.cloneNode(true);
-        btn.parentNode.replaceChild(newBtn, btn);
-        newBtn.addEventListener('click', () => {
-            currentLang = currentLang === 'fr' ? 'en' : 'fr';
-            localStorage.setItem('language', currentLang);
-            document.body.classList.remove('fr', 'en');
-            document.body.classList.add(currentLang);
-            document.querySelectorAll('.lang-toggle-btn').forEach(b => {
-                b.innerText = currentLang === 'fr' ? 'EN' : 'FR';
-            });
-        });
-    });
+  teardownGlobes();
+  app.innerHTML = `
+    <div class="kit dir-editorial">
+      <div class="scroll-prog" data-progress></div>
+      ${navHTML(t, lang, state.theme)}
+      ${heroHTML(t, lang)}
+      ${skillsHTML(t)}
+      ${flagshipHTML(t, lang)}
+      ${projectsSectionHTML(t, lang)}
+      ${formationsHTML(t, lang)}
+      ${contactHTML(t)}
+      ${footerHTML(t)}
+    </div>`;
+
+  // Mount the tech globes (hero 400, skills 420)
+  app.querySelectorAll('[data-globe]').forEach((host) => {
+    const size = Number(host.dataset.globe);
+    globeCleanups.push(mountGlobe(host, { items: PORTFOLIO.stack, size }));
+  });
+
+  initProjects(app, t, lang);
+  wireNav();
+  wireContactForm(t);
+  updateProgress();
 }
 
-function updateScrollProgress() {
-    const progressBar = document.getElementById('scroll-progress-bar');
-    if (progressBar) {
-        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
-        progressBar.style.height = `${progress}%`;
-    }
+function wireNav() {
+  const langBtn = app.querySelector('[data-action="lang"]');
+  const themeBtn = app.querySelector('[data-action="theme"]');
+  langBtn?.addEventListener('click', () => {
+    state.lang = state.lang === 'fr' ? 'en' : 'fr';
+    localStorage.setItem('pf-lang', state.lang);
+    render();
+  });
+  themeBtn?.addEventListener('click', () => {
+    state.theme = state.theme === 'dark' ? 'light' : 'dark';
+    applyTheme();
+    themeBtn.innerHTML = state.theme === 'dark' ? Ic.sun() : Ic.moon();
+  });
 }
 
-function handleNavigation() {
-    let path = window.location.hash.replace('#', '');
-    if (!path || path === '') path = '/';
-
-    const view = router[path] || router['/'];
-    if (typeof view === 'function') {
-        renderLayout(view());
-        setupTheme();
-    } else {
-        renderLayout('<h2 class="text-center py-20 text-2xl dark:text-white"><span class="lang-fr">Erreur 404 - Vue introuvable</span><span class="lang-en">Error 404 - View not found</span></h2>');
-    }
-
-    setTimeout(updateScrollProgress, 50);
+function wireContactForm(t) {
+  const form = app.querySelector('[data-contact-form]');
+  const sent = app.querySelector('[data-contact-sent]');
+  if (!form) return;
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    try {
+      await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+    } catch (_) { /* show confirmation regardless — graceful offline fallback */ }
+    form.hidden = true;
+    sent.hidden = false;
+  });
 }
 
-document.addEventListener('click', (e) => {
-    const burgerBtn = e.target.closest('#burger-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
+function updateProgress() {
+  const bar = app.querySelector('[data-progress]');
+  if (!bar) return;
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  bar.style.width = `${h > 0 ? (window.scrollY / h) * 100 : 0}%`;
+}
 
-    if (burgerBtn && mobileMenu) {
-        mobileMenu.classList.toggle('hidden');
-        return;
-    }
+window.addEventListener('scroll', updateProgress, { passive: true });
+window.addEventListener('resize', updateProgress);
 
-    if (mobileMenu && !mobileMenu.classList.contains('hidden') && e.target.closest('a')) {
-        mobileMenu.classList.add('hidden');
-    }
-});
-
-window.addEventListener('scroll', updateScrollProgress);
-window.addEventListener('resize', updateScrollProgress);
-window.addEventListener('hashchange', handleNavigation);
-window.addEventListener('load', handleNavigation);
-
-handleNavigation();
+applyTheme();
+render();

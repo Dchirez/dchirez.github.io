@@ -1,0 +1,57 @@
+/* Inline-SVG icon set + UI primitives, as HTML-string builders.
+   Ported from the design system's ui.jsx (Lucide-style geometry, 2px round caps). */
+
+export const Ic = {
+  sun: () => `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg>`,
+  moon: () => `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>`,
+  github: () => `<svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>`,
+  mail: () => `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>`,
+  arrowRight: () => `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`,
+  arrowLeft: () => `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>`,
+  arrowUpRight: () => `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>`,
+  fileText: () => `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg>`,
+  close: () => `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>`,
+  menu: () => `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>`,
+  mapPin: () => `<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
+  sparkle: () => `<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8z"/></svg>`,
+};
+
+export const DEV_BASE = 'https://raw.githubusercontent.com/devicons/devicon/master/icons/';
+export const TECH_ICON = {
+  java: 'java/java-original.svg', c: 'c/c-original.svg', web: 'html5/html5-original.svg',
+  typescript: 'typescript/typescript-original.svg', kotlin: 'kotlin/kotlin-original.svg',
+  angular: 'angular/angular-original.svg', python: 'python/python-original.svg',
+};
+export const TECH_NAME = { java: 'Java', c: 'C', web: 'Web', typescript: 'TypeScript', kotlin: 'Kotlin', angular: 'Angular', python: 'Python' };
+
+const escapeAttr = (s = '') => String(s).replace(/"/g, '&quot;');
+
+/* Button — variants: gradient | primary | secondary | ghost ; sizes: sm | md | lg.
+   Hover transitions are handled in portfolio.css via the .btn[data-variant] selectors. */
+export function Button({ children = '', variant = 'primary', size = 'md', href, icon = '', iconRight = '', full = false, type = 'button', target, id, dataAttr = '' }) {
+  const inner = `${icon ? `<span class="btn-i">${icon}</span>` : ''}${children}${iconRight ? `<span class="btn-i">${iconRight}</span>` : ''}`;
+  const cls = `btn btn-${variant} btn-${size}${full ? ' btn-full' : ''}`;
+  const idAttr = id ? ` id="${id}"` : '';
+  if (href) {
+    const tgt = target ? ` target="${target}" rel="noopener"` : '';
+    return `<a class="${cls}" href="${escapeAttr(href)}"${tgt}${idAttr}${dataAttr}>${inner}</a>`;
+  }
+  return `<button class="${cls}" type="${type}"${idAttr}${dataAttr}>${inner}</button>`;
+}
+
+/* Badge — tone: accent | violet | neutral | outline | success */
+export function Badge({ children = '', tone = 'neutral', size = 'md' }) {
+  return `<span class="badge badge-${tone} badge-${size}">${children}</span>`;
+}
+
+/* StatusPill — pulsing live dot + label */
+export function StatusPill(label) {
+  return `<span class="status-pill"><span class="status-dot"><span class="status-dot-ping"></span><span class="status-dot-core"></span></span>${label}</span>`;
+}
+
+/* TechBadge — devicon logo + name. size: sm | md | lg ; interactive adds hover lift. */
+export function TechBadge(tech, size = 'md', interactive = false) {
+  const sz = size === 'sm' ? 18 : size === 'lg' ? 28 : 22;
+  const src = DEV_BASE + (TECH_ICON[tech] || TECH_ICON.web);
+  return `<span class="tech-badge tech-badge-${size}${interactive ? ' is-interactive' : ''}"><img src="${src}" alt="" width="${sz}" height="${sz}" loading="lazy">${TECH_NAME[tech] || tech}</span>`;
+}

@@ -1,0 +1,114 @@
+/* ============================================================
+   COLORS — Damien Chirez Portfolio Design System
+   Two accents: Orange (primary, energy) + Violet (secondary, depth)
+   Warm-neutral "ink" scale. Light + dark themes.
+   ============================================================ */
+
+:root {
+  /* --- Brand: Orange (primary accent) --- */
+  --orange-50:  #fff7ed;
+  --orange-100: #ffedd5;
+  --orange-200: #fed7aa;
+  --orange-300: #fdba74;
+  --orange-400: #fb923c;
+  --orange-500: #f97316;
+  --orange-600: #ea580c; /* core */
+  --orange-700: #c2410c;
+  --orange-800: #9a3412;
+  --orange-900: #7c2d12;
+
+  /* --- Brand: Violet (secondary accent) --- */
+  --violet-50:  #f5f3ff;
+  --violet-100: #ede9fe;
+  --violet-200: #ddd6fe;
+  --violet-300: #c4b5fd;
+  --violet-400: #a78bfa;
+  --violet-500: #8b5cf6;
+  --violet-600: #7c3aed; /* core */
+  --violet-700: #6d28d9;
+  --violet-800: #5b21b6;
+  --violet-900: #4c1d95;
+
+  /* --- Neutral: Ink (zinc) --- */
+  --ink-0:   #ffffff;
+  --ink-50:  #fafafa;
+  --ink-100: #f4f4f5;
+  --ink-200: #e4e4e7;
+  --ink-300: #d4d4d8;
+  --ink-400: #a1a1aa;
+  --ink-500: #71717a;
+  --ink-600: #52525b;
+  --ink-700: #3f3f46;
+  --ink-800: #27272a;
+  --ink-900: #18181b;
+  --ink-950: #09090b;
+
+  /* --- Signal --- */
+  --green-500: #16a34a;
+  --green-400: #22c55e;
+  --red-500:   #dc2626;
+  --amber-500: #f59e0b;
+
+  /* === Semantic aliases — LIGHT (default) === */
+  --accent:           var(--orange-600);
+  --accent-hover:     var(--orange-700);
+  --accent-soft:      var(--orange-50);
+  --accent-on:        #ffffff;
+  --accent-2:         var(--violet-600);
+  --accent-2-hover:   var(--violet-700);
+  --accent-2-soft:    var(--violet-50);
+
+  /* brand gradient: orange -> violet */
+  --brand-gradient: linear-gradient(110deg, var(--orange-600) 0%, var(--violet-600) 100%);
+  --brand-gradient-soft: linear-gradient(110deg, var(--orange-500) 0%, var(--violet-500) 100%);
+
+  --bg-page:        var(--ink-50);
+  --bg-page-alt:    var(--ink-100);
+  --surface-card:   var(--ink-0);
+  --surface-raised: var(--ink-0);
+  --surface-sunken: var(--ink-100);
+
+  --text-strong:  var(--ink-900);
+  --text-body:    var(--ink-700);
+  --text-muted:   var(--ink-500);
+  --text-faint:   var(--ink-400);
+  --text-on-accent: #ffffff;
+
+  --border:        var(--ink-200);
+  --border-strong: var(--ink-300);
+  --border-accent: var(--orange-300);
+
+  --status-online: var(--green-500);
+
+  /* Selection */
+  --selection-bg: var(--orange-200);
+}
+
+/* === DARK theme === */
+.dark, :root.dark, [data-theme="dark"] {
+  --accent:         var(--orange-500);
+  --accent-hover:   var(--orange-400);
+  --accent-soft:    rgba(234, 88, 12, 0.14);
+  --accent-2:       var(--violet-400);
+  --accent-2-hover: var(--violet-300);
+  --accent-2-soft:  rgba(124, 58, 237, 0.18);
+
+  --brand-gradient: linear-gradient(110deg, var(--orange-500) 0%, var(--violet-400) 100%);
+
+  --bg-page:        var(--ink-950);
+  --bg-page-alt:    #0d0d10;
+  --surface-card:   var(--ink-900);
+  --surface-raised: var(--ink-800);
+  --surface-sunken: #101013;
+
+  --text-strong:  #fafafa;
+  --text-body:    var(--ink-300);
+  --text-muted:   var(--ink-400);
+  --text-faint:   var(--ink-500);
+
+  --border:        rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --border-accent: var(--orange-500);
+
+  --selection-bg: rgba(234, 88, 12, 0.35);
+}
