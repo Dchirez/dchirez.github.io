@@ -1,7 +1,7 @@
 /* App entry — composes the single-page Éditorial portfolio in vanilla JS.
    Handles language, theme, the tech globes, projects interactivity,
-   the contact form (Formspree) and the scroll-progress bar. */
-import './styles/styles.css';
+   the contact form (Formspree) and the scroll-progress bar.
+   Styles are linked from index.html (no build step required). */
 import { PORTFOLIO } from './data.js';
 import { STR } from './i18n.js';
 import { Ic } from './ui.js';
