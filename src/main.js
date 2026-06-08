@@ -50,9 +50,12 @@ function render() {
       ${footerHTML(t)}
     </div>`;
 
-  // Mount the tech globes (hero 400, skills 420)
+  // Mount the tech globes (hero 400, skills 420) — responsive sizing
   app.querySelectorAll('[data-globe]').forEach((host) => {
-    const size = Number(host.dataset.globe);
+    const baseSize = Number(host.dataset.globe);
+    const vw = window.innerWidth;
+    const scale = vw <= 400 ? 0.55 : vw <= 600 ? 0.65 : vw <= 860 ? 0.8 : 1;
+    const size = Math.round(baseSize * scale);
     globeCleanups.push(mountGlobe(host, { items: PORTFOLIO.stack, size }));
   });
 
@@ -63,18 +66,49 @@ function render() {
 }
 
 function wireNav() {
-  const langBtn = app.querySelector('[data-action="lang"]');
-  const themeBtn = app.querySelector('[data-action="theme"]');
-  langBtn?.addEventListener('click', () => {
+  const langBtns = app.querySelectorAll('[data-action="lang"]');
+  const themeBtns = app.querySelectorAll('[data-action="theme"]');
+  const menuBtn = app.querySelector('[data-action="menu"]');
+  const drawer = document.querySelector('[data-mobile-drawer]');
+  const overlay = document.querySelector('[data-mobile-overlay]');
+  const closeBtn = app.querySelector('[data-action="close-drawer"]');
+
+  function openDrawer() {
+    drawer?.classList.add('is-open');
+    overlay?.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() {
+    drawer?.classList.remove('is-open');
+    overlay?.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  menuBtn?.addEventListener('click', openDrawer);
+  closeBtn?.addEventListener('click', closeDrawer);
+  overlay?.addEventListener('click', closeDrawer);
+
+  // Close drawer when clicking any drawer link
+  app.querySelectorAll('[data-drawer-link]').forEach((link) =>
+    link.addEventListener('click', closeDrawer));
+  // Close drawer CTA links too
+  drawer?.querySelectorAll('.drawer-cta a').forEach((link) =>
+    link.addEventListener('click', closeDrawer));
+
+  langBtns.forEach((btn) => btn.addEventListener('click', () => {
+    closeDrawer();
     state.lang = state.lang === 'fr' ? 'en' : 'fr';
     localStorage.setItem('pf-lang', state.lang);
     render();
-  });
-  themeBtn?.addEventListener('click', () => {
+  }));
+  themeBtns.forEach((btn) => btn.addEventListener('click', () => {
     state.theme = state.theme === 'dark' ? 'light' : 'dark';
     applyTheme();
-    themeBtn.innerHTML = state.theme === 'dark' ? Ic.sun() : Ic.moon();
-  });
+    // Update all theme button icons
+    app.querySelectorAll('[data-action="theme"]').forEach((b) => {
+      b.innerHTML = state.theme === 'dark' ? Ic.sun() : Ic.moon();
+    });
+  }));
 }
 
 function wireContactForm(t) {

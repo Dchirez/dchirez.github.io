@@ -15,6 +15,7 @@ export function navHTML(t, lang, theme) {
         ${Button({ size: 'sm', variant: 'secondary', href: ID.cv, target: '_blank', icon: Ic.fileText(), children: t.cv })}
         ${Button({ size: 'sm', variant: 'primary', href: '#contact', children: t.nav.cta })}
       </span>
+      <button class="mobile-menu-btn" data-action="menu" aria-label="menu">${Ic.menu()}</button>
     </div>`;
   return `
     <nav class="kit-nav">
@@ -28,7 +29,29 @@ export function navHTML(t, lang, theme) {
         </div>
         ${tools}
       </div>
-    </nav>`;
+    </nav>
+    <div class="mobile-nav-overlay" data-mobile-overlay></div>
+    <div class="mobile-nav-drawer" data-mobile-drawer>
+      <div class="drawer-header">
+        <span class="brand">Damien<b>.Dev</b></span>
+        <button class="icon-btn" data-action="close-drawer" aria-label="close">${Ic.close()}</button>
+      </div>
+      <div class="drawer-links">
+        <a href="#projets" data-drawer-link>${t.nav.projects}</a>
+        <a href="#competences" data-drawer-link>${t.nav.skills}</a>
+        <a href="#parcours" data-drawer-link>${t.nav.education}</a>
+        <a href="#contact" data-drawer-link>${t.nav.contact}</a>
+      </div>
+      <div class="drawer-cta">
+        ${Button({ size: 'md', variant: 'primary', href: '#contact', full: true, children: t.nav.cta })}
+        ${Button({ size: 'md', variant: 'secondary', href: ID.cv, target: '_blank', full: true, icon: Ic.fileText(), children: t.cv })}
+        <div class="drawer-tools">
+          <button class="icon-btn lang-btn" data-action="lang">${lang === 'fr' ? 'EN' : 'FR'}</button>
+          <button class="icon-btn" data-action="theme" aria-label="theme">${theme === 'dark' ? Ic.sun() : Ic.moon()}</button>
+          <a class="icon-btn" href="${ID.github}" target="_blank" rel="noopener" aria-label="GitHub">${Ic.github()}</a>
+        </div>
+      </div>
+    </div>`;
 }
 
 /* ---------- HERO · EDITORIAL ---------- */

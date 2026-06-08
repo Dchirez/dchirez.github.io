@@ -30,7 +30,6 @@
 .icon-btn { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius-pill); border: 1px solid var(--border); background: var(--surface-card); color: var(--text-muted); cursor: pointer; transition: all var(--dur-fast); }
 .icon-btn:hover { color: var(--accent); border-color: var(--border-accent); transform: translateY(-1px); }
 .lang-btn { font-family: var(--font-mono); font-size: 12px; font-weight: 600; min-width: 40px; }
-@media (max-width: 860px) { .nav-links { display: none; } }
 
 /* ---------- HERO base ---------- */
 .hero { padding: clamp(70px, 11vh, 130px) 0 90px; position: relative; overflow: hidden; }
@@ -116,3 +115,121 @@
 .dir-editorial .pcard { box-shadow: none; border-radius: var(--radius-md); }
 .dir-editorial .pcard:hover { box-shadow: var(--shadow-md); }
 .dir-editorial .h-section { font-size: var(--text-5xl); }
+
+/* ============================================================
+   RESPONSIVE — Tablet (≤860px)
+   ============================================================ */
+@media (max-width: 860px) {
+  .container { padding: 0 20px; }
+  .section { padding: 72px 0; }
+  .dir-editorial .section { padding: 80px 0; }
+  .h-section { font-size: var(--text-3xl); }
+  .dir-editorial .h-section { font-size: var(--text-4xl); }
+
+  /* Hero */
+  .hero { padding: clamp(50px, 8vh, 90px) 0 60px; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3rem); }
+  .hero .sub { font-size: var(--text-base); }
+  .hero-stage { min-height: 280px; }
+
+  /* Coverflow — smaller */
+  .cf-viewport { height: 240px; perspective: 1000px; }
+  .cf-card { width: 240px; height: 180px; margin-left: -120px; margin-top: -90px; }
+  .cf-logo { width: 64px; height: 64px; margin-bottom: 10px; }
+  .cf-title { font-size: var(--text-lg); }
+
+  /* Flagship */
+  .flagship { padding: 28px; gap: 28px; }
+  .flagship-logo { width: 80px; height: 80px; }
+  .flagship-logo img { width: 56px; height: 56px; }
+  .score-ring { width: 140px; height: 140px; }
+
+  /* Footer */
+  .kit-footer .inner { flex-direction: column; text-align: center; gap: 14px; }
+}
+
+/* ============================================================
+   RESPONSIVE — Mobile (≤600px)
+   ============================================================ */
+@media (max-width: 600px) {
+  :root {
+    --nav-height: 60px;
+  }
+  .container { padding: 0 16px; }
+  .section { padding: 56px 0; }
+  .dir-editorial .section { padding: 60px 0; }
+  .h-section { font-size: var(--text-2xl); }
+  .dir-editorial .h-section { font-size: var(--text-3xl); }
+  .lead { font-size: var(--text-base); }
+  .eyebrow { font-size: 10px; }
+
+  /* Hero */
+  .hero { padding: 40px 0 48px; }
+  .hero h1 { font-size: clamp(1.75rem, 7vw, 2.4rem); }
+  .hero .sub { font-size: var(--text-sm); margin-top: 16px; }
+  .hero .cta-row { flex-direction: column; align-items: stretch; gap: 10px; }
+  .hero .cta-row .btn { width: 100%; justify-content: center; }
+  .hero .cta-row .status-pill { align-self: center; }
+  .hero-stage { min-height: 220px; }
+  .stat-row { gap: 20px; margin-top: 28px; }
+  .stat .n { font-size: var(--text-2xl); }
+  .stat .l { font-size: 10px; }
+
+  /* Coverflow */
+  .coverflow { gap: 8px; }
+  .cf-viewport { height: 200px; perspective: 800px; }
+  .cf-card { width: 200px; height: 160px; margin-left: -100px; margin-top: -80px; }
+  .cf-logo { width: 52px; height: 52px; margin-bottom: 8px; }
+  .cf-title { font-size: var(--text-base); }
+  .cf-tech { font-size: 11px; }
+  .cf-nav { width: 40px !important; height: 40px !important; }
+
+  /* Filter chips */
+  .filter-bar { gap: 6px; }
+  .fchip { font-size: 11px; padding: 6px 11px; }
+
+  /* Flagship */
+  .flagship { padding: 22px; gap: 22px; border-radius: var(--radius-xl); }
+  .flagship-logo { width: 64px; height: 64px; }
+  .flagship-logo img { width: 44px; height: 44px; }
+  .flagship-visual { flex-direction: column; align-items: center; }
+  .score-ring { width: 120px; height: 120px; }
+
+  /* Project cards */
+  .pcard { padding: 16px; gap: 10px; }
+  .pcard-logo { width: 44px; height: 44px; }
+  .pcard-logo img { width: 32px; height: 32px; }
+  .pcard h3 { font-size: var(--text-lg); }
+  .pcard p { font-size: var(--text-xs); }
+
+  /* Contact */
+  .contact-card { padding: 22px; }
+
+  /* Modal */
+  .modal-overlay { padding: 12px; }
+  .modal { max-height: 92vh; border-radius: var(--radius-lg); }
+  .modal-head { padding: 22px; gap: 14px; flex-wrap: wrap; }
+  .modal-head h2 { font-size: var(--text-2xl); }
+  .modal-logo { width: 60px; height: 60px; }
+
+  /* Footer */
+  .kit-footer { padding: 28px 0; }
+  .kit-footer .inner { flex-direction: column; text-align: center; gap: 12px; }
+}
+
+/* ============================================================
+   RESPONSIVE — Small phones (≤400px)
+   ============================================================ */
+@media (max-width: 400px) {
+  .container { padding: 0 12px; }
+  .hero h1 { font-size: 1.6rem; }
+  .stat-row { flex-direction: column; gap: 14px; }
+  .cf-viewport { height: 170px; }
+  .cf-card { width: 170px; height: 140px; margin-left: -85px; margin-top: -70px; }
+  .modal-head { padding: 16px; }
+
+  /* Filter chips scroll horizontally */
+  .filter-bar { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 4px; justify-content: flex-start !important; }
+  .filter-bar::-webkit-scrollbar { display: none; }
+  .fchip { flex-shrink: 0; }
+}
