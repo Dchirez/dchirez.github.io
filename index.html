@@ -3,13 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Damien Chirez — Portfolio</title>
-    <meta name="description" content="Portfolio de Damien Chirez — étudiant en BUT Informatique, à la recherche d'une alternance en développement dès septembre 2026.">
+
+    <!-- Primary SEO -->
+    <title>Damien Chirez — Développeur Fullstack · Alternance 2026 | Portfolio</title>
+    <meta name="description" content="Portfolio de Damien Chirez, étudiant en BUT Informatique à l'IUT de Lens. Développeur fullstack (Java, C, Angular, Python, Kotlin). En recherche d'une alternance en développement dès septembre 2026.">
+    <meta name="keywords" content="Damien Chirez, développeur, développeur fullstack, alternance 2026, alternance informatique, BUT Informatique, IUT de Lens, Angular, Python, Java, Kotlin, TypeScript, portfolio développeur">
+    <meta name="author" content="Damien Chirez">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#0a0a0b">
+    <link rel="canonical" href="https://dchirez.fr/">
+
+    <!-- Open Graph (LinkedIn, Facebook, WhatsApp…) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Damien Chirez — Portfolio">
+    <meta property="og:title" content="Damien Chirez — Développeur Fullstack · Alternance 2026">
+    <meta property="og:description" content="Étudiant en BUT Informatique à l'IUT de Lens. Développeur fullstack (Java, C, Angular, Python). En recherche d'alternance dès septembre 2026.">
+    <meta property="og:url" content="https://dchirez.fr/">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:image" content="https://dchirez.fr/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Damien Chirez — Développeur Fullstack, alternance dès septembre 2026">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Damien Chirez — Développeur Fullstack · Alternance 2026">
+    <meta name="twitter:description" content="Étudiant en BUT Informatique à l'IUT de Lens. Fullstack Java, C, Angular, Python. Alternance dès septembre 2026.">
+    <meta name="twitter:image" content="https://dchirez.fr/og-image.png">
+
     <link rel="icon" type="image/png" href="/logo/Favicon.png">
+    <link rel="apple-touch-icon" href="/logo/Favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="/src/styles/styles.css?v=20260609b">
+
+    <!-- Structured data: Person (Google rich results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Damien Chirez",
+      "url": "https://dchirez.fr/",
+      "image": "https://dchirez.fr/og-image.png",
+      "jobTitle": "Étudiant en BUT Informatique — Développeur fullstack",
+      "description": "Développeur fullstack en recherche d'une alternance dès septembre 2026.",
+      "email": "mailto:dchirez59@gmail.com",
+      "sameAs": ["https://github.com/Dchirez"],
+      "knowsAbout": ["Java", "C", "TypeScript", "JavaScript", "Angular", "Python", "Kotlin", "Flask", "React", "Tailwind CSS", "Git"],
+      "alumniOf": { "@type": "CollegeOrUniversity", "name": "IUT de Lens" },
+      "address": { "@type": "PostalAddress", "addressLocality": "Lens", "addressRegion": "Hauts-de-France", "addressCountry": "FR" },
+      "seeks": { "@type": "Demand", "name": "Alternance en développement (septembre 2026)" }
+    }
+    </script>
+
     <style>
         html { scroll-behavior: smooth; scrollbar-width: none; }
         html::-webkit-scrollbar { width: 0; }
@@ -18,6 +65,25 @@
 </head>
 <body>
     <div id="root"></div>
+
+    <!-- Crawlable fallback for engines/scrapers that don't run JavaScript -->
+    <noscript>
+        <main style="max-width:760px;margin:0 auto;padding:40px 20px;font-family:system-ui,sans-serif;line-height:1.6;color:#111">
+            <h1>Damien Chirez — Développeur Fullstack</h1>
+            <p><strong>Étudiant en BUT Informatique à l'IUT de Lens.</strong> Je conçois et développe des applications — du jeu console en C au fullstack Angular / Python. En recherche d'une <strong>alternance en développement dès septembre 2026</strong>.</p>
+            <h2>Compétences</h2>
+            <p>Java, C, TypeScript, JavaScript, Angular, Python, Kotlin, Flask, React, Tailwind CSS, Git.</p>
+            <h2>Projets</h2>
+            <ul>
+                <li><strong>GMB Manager</strong> — application fullstack de gestion des fiches Google My Business (Angular, Python, TypeScript).</li>
+                <li><strong>OrdoRead</strong> — extraction et automatisation de rappels médicaux (Kotlin).</li>
+                <li><strong>Pac-Man</strong> — reproduction du jeu avec design patterns (Java, Gradle).</li>
+            </ul>
+            <h2>Contact</h2>
+            <p>Email : <a href="mailto:dchirez59@gmail.com">dchirez59@gmail.com</a> · GitHub : <a href="https://github.com/Dchirez">github.com/Dchirez</a> · <a href="/cv/">CV</a></p>
+        </main>
+    </noscript>
+
     <script type="module" src="/src/main.js?v=20260609b"></script>
 </body>
 </html>
