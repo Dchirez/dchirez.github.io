@@ -12,6 +12,7 @@ export const PORTFOLIO = {
     statusEn: 'Open to work · Alternance from September 2026',
     email: 'dchirez59@gmail.com',
     github: 'https://github.com/Dchirez?tab=repositories',
+    linkedin: 'https://www.linkedin.com/in/damien-chirez-b0aa66355/',
     location: 'IUT de Lens, France',
     cv: '/cv/',
     formspree: 'https://formspree.io/f/mykbjbdb',

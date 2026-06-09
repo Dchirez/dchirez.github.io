@@ -207,6 +207,7 @@ export function footerHTML(t) {
       <div class="container inner">
         <div class="brand">Damien<b>.Dev</b></div>
         <div style="display:flex;gap:10px">
+          <a class="icon-btn" href="${ID.linkedin}" target="_blank" rel="noopener" aria-label="LinkedIn">${Ic.linkedin()}</a>
           <a class="icon-btn" href="${ID.github}" target="_blank" rel="noopener" aria-label="GitHub">${Ic.github()}</a>
           <a class="icon-btn" href="mailto:${ID.email}" aria-label="Email">${Ic.mail()}</a>
         </div>
