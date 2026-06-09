@@ -30,6 +30,7 @@ export function navHTML(t, lang, theme) {
         ${tools}
       </div>
     </nav>
+    <div class="mobile-nav-root">
     <div class="mobile-nav-overlay" data-mobile-overlay></div>
     <div class="mobile-nav-drawer" data-mobile-drawer>
       <div class="drawer-header">
@@ -51,6 +52,7 @@ export function navHTML(t, lang, theme) {
           <a class="icon-btn" href="${ID.github}" target="_blank" rel="noopener" aria-label="GitHub">${Ic.github()}</a>
         </div>
       </div>
+    </div>
     </div>`;
 }
 

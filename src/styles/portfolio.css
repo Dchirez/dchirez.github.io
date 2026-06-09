@@ -8,6 +8,10 @@
 @keyframes kit-blink { 0%,49% { opacity: 1 } 50%,100% { opacity: 0 } }
 @keyframes kit-float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-14px) } }
 
+/* Clip horizontal overflow at the viewport (off-canvas mobile drawer) without
+   creating a scroll container — `clip` keeps the sticky nav working, unlike
+   `hidden` which would break it. */
+html { overflow-x: clip; }
 .kit { min-height: 100vh; background: var(--bg-page); color: var(--text-body); font-family: var(--font-sans); display: flex; flex-direction: column; transition: background var(--dur-base) var(--ease-out); position: relative; }
 .kit * { box-sizing: border-box; }
 .container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 28px; }
@@ -44,6 +48,9 @@
 .hero-grid--single .sub { max-width: 38em; margin-left: auto; margin-right: auto; }
 .hero-grid--single .cta-row,
 .hero-grid--single .stat-row { justify-content: center; }
+/* Let grid items shrink to the viewport instead of forcing it wider
+   (min-width:auto on grid items is what creates horizontal scroll). */
+.hero-grid > * { min-width: 0; max-width: 100%; }
 @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 28px; } .hero-stage { order: -1; } }
 
 /* stat strip */
@@ -175,7 +182,8 @@
   .hero .sub { font-size: var(--text-sm); margin-top: 16px; }
   .hero .cta-row { flex-direction: column; align-items: stretch; gap: 10px; }
   .hero .cta-row .btn { width: 100%; justify-content: center; }
-  .hero .cta-row .status-pill { align-self: center; }
+  /* Long status text must wrap, not force the page wider than the screen */
+  .hero .cta-row .status-pill { align-self: center; white-space: normal; text-align: center; max-width: 100%; }
   .hero-stage { min-height: 220px; }
   .stat-row { gap: 20px; margin-top: 28px; }
   .stat .n { font-size: var(--text-2xl); }
