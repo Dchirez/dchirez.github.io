@@ -74,7 +74,7 @@ html { overflow-x: clip; }
 .pcard p { font-size: var(--text-sm); color: var(--text-muted); line-height: 1.6; }
 
 /* filter chips */
-.filter-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.filter-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; max-width: 100%; min-width: 0; }
 .fchip { font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: .03em; padding: 8px 15px; border-radius: var(--radius-pill); border: 1px solid var(--border); background: var(--surface-card); color: var(--text-muted); cursor: pointer; transition: all var(--dur-fast); display: inline-flex; align-items: center; gap: 7px; }
 .fchip:hover { border-color: var(--border-accent); color: var(--text-strong); }
 .fchip.active { background: var(--accent); color: var(--accent-on); border-color: var(--accent); }
@@ -242,8 +242,8 @@ html { overflow-x: clip; }
   .cf-card { width: 170px; height: 140px; margin-left: -85px; margin-top: -70px; }
   .modal-head { padding: 16px; }
 
-  /* Filter chips scroll horizontally */
-  .filter-bar { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 4px; justify-content: flex-start !important; }
-  .filter-bar::-webkit-scrollbar { display: none; }
-  .fchip { flex-shrink: 0; }
+  /* Filter chips wrap on small screens — a nowrap+scroll bar overflowed the
+     page on real phones, which expanded the mobile viewport and broke the
+     responsive layout (horizontal scroll). Wrapping can never overflow. */
+  .filter-bar { gap: 6px; }
 }
