@@ -58,7 +58,7 @@ export function navHTML(t, lang, theme) {
 export function heroHTML(t, lang) {
   return `
     <header class="hero" id="top">
-      <div class="container hero-grid">
+      <div class="container hero-grid hero-grid--single">
         <div class="reveal">
           <div class="accent-rule"></div>
           <span class="eyebrow">${lang === 'fr' ? ID.roleFr : ID.roleEn} · ${ID.location}</span>
@@ -75,7 +75,6 @@ export function heroHTML(t, lang) {
             <div class="stat"><div class="n grad">2026</div><div class="l">${t.statAvail}</div></div>
           </div>
         </div>
-        <div class="hero-stage reveal"><div class="globe-host" data-globe="400"></div></div>
       </div>
     </header>`;
 }

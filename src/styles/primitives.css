@@ -72,6 +72,19 @@
 }
 .globe-tile img { pointer-events: none; }
 
+/* Wireframe grid (meridians + parallels) */
+.globe-wire { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-style: preserve-3d; pointer-events: none; }
+.globe-ring {
+  position: absolute; left: 0; top: 0; border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--globe-grid, var(--accent)) 32%, transparent);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--globe-grid, var(--accent)) 12%, transparent) inset;
+  backface-visibility: visible;
+}
+.globe-ring--parallel {
+  border-color: color-mix(in srgb, var(--globe-grid, var(--accent)) 22%, transparent);
+  box-shadow: none;
+}
+
 /* ---------- Coverflow ---------- */
 .coverflow { display: flex; align-items: center; justify-content: center; gap: 16px; }
 .cf-viewport { flex: 1; height: 300px; perspective: 1400px; position: relative; }

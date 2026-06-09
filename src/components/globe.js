@@ -27,6 +27,42 @@ export function mountGlobe(host, { items, size = 380, iconSize = 48, speed = 0.2
   const sphere = document.createElement('div');
   sphere.className = 'globe-sphere';
 
+  // Wireframe: meridians (longitude) + parallels (latitude), children of the
+  // sphere so they rotate with it. Mimics the blue grid globe from the design.
+  const wire = document.createElement('div');
+  wire.className = 'globe-wire';
+
+  const meridians = 8;
+  for (let i = 0; i < meridians; i++) {
+    const ring = document.createElement('div');
+    ring.className = 'globe-ring';
+    const d = radius * 2;
+    ring.style.width = d + 'px';
+    ring.style.height = d + 'px';
+    ring.style.marginLeft = (-radius) + 'px';
+    ring.style.marginTop = (-radius) + 'px';
+    ring.style.transform = `rotateY(${(i / meridians) * 180}deg)`;
+    wire.appendChild(ring);
+  }
+
+  const parallels = 5; // excludes the poles
+  for (let i = 1; i <= parallels; i++) {
+    const lat = (i / (parallels + 1)) * Math.PI - Math.PI / 2; // -90..90
+    const rr = Math.cos(lat) * radius;
+    const yy = Math.sin(lat) * radius;
+    const ring = document.createElement('div');
+    ring.className = 'globe-ring globe-ring--parallel';
+    const d = rr * 2;
+    ring.style.width = d + 'px';
+    ring.style.height = d + 'px';
+    ring.style.marginLeft = (-rr) + 'px';
+    ring.style.marginTop = (-rr) + 'px';
+    ring.style.transform = `translateY(${yy}px) rotateX(90deg)`;
+    wire.appendChild(ring);
+  }
+
+  sphere.appendChild(wire);
+
   const itemEls = [];
   items.forEach((it) => {
     const el = document.createElement('div');
