@@ -17,7 +17,7 @@
 .btn-md { height: 48px; padding: 0 22px; font-size: 16px; }
 .btn-lg { height: 56px; padding: 0 30px; font-size: 18px; }
 
-.btn-gradient { background: var(--brand-gradient); color: #fff; box-shadow: var(--shadow-accent); }
+.btn-gradient { background: var(--brand-gradient); background-clip: padding-box; color: #fff; box-shadow: var(--shadow-accent); }
 .btn-gradient:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
 .btn-primary { background: var(--accent); color: var(--accent-on); }
 .btn-primary:hover { transform: translateY(-2px); background: var(--accent-hover); }
