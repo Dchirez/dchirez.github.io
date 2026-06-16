@@ -1,0 +1,101 @@
+/* ============================================================
+   Custom cursor — brand-gradient dot + soft trailing glow.
+   Recreates the "dot + halo" look, tinted with the site's
+   orange→violet DA. Mouse / fine-pointer only; the native
+   cursor is hidden only while the custom one is active.
+   ============================================================ */
+
+@media (hover: hover) and (pointer: fine) {
+  .has-cursor, .has-cursor * { cursor: none !important; }
+}
+
+/* Outer layers: JS sets their translate() for the position.
+   No transition here so the position stays 1:1 with the mouse. */
+.cursor-glow,
+.cursor-dot,
+.cursor-trail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s var(--ease-out, ease);
+  will-change: transform;
+}
+.cursor-trail { z-index: 9998; } /* the tail sits behind the halo + dot */
+/* The halo + trail show for both mouse and touch; the dot is mouse-only. */
+.cursor-active .cursor-glow,
+.cursor-active .cursor-trail { opacity: 1; }
+.cursor-mouse.cursor-active .cursor-dot { opacity: 1; }
+
+/* Inner visuals: centered on the point, only the scale animates
+   (so hover/press feedback is smooth without lagging position). */
+.cursor-dot-i,
+.cursor-glow-i {
+  transform: translate(-50%, -50%) scale(1);
+  border-radius: 50%;
+  background: var(--brand-gradient);
+}
+
+.cursor-dot-i {
+  width: 14px;
+  height: 14px;
+  background: #fff; /* light mode: white core */
+  border: 1.5px solid var(--orange-600);
+  transition: transform 0.2s var(--ease-out, ease);
+}
+.dark .cursor-dot-i { background: #000; } /* dark mode: black core */
+
+.cursor-glow-i {
+  width: 30px;
+  height: 30px;
+  filter: blur(7px);
+  opacity: 0.5;
+  transition: transform 0.25s var(--ease-out, ease), opacity 0.25s var(--ease-out, ease);
+}
+
+/* Trail segments — smaller blurred brand-gradient halos. Their per-segment
+   scale + opacity (fading down the tail) are set inline by the JS. */
+.cursor-trail-i {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--brand-gradient);
+  filter: blur(6px);
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Over interactive elements: halo blooms, dot tightens to a point. */
+.cursor-hover .cursor-glow-i { transform: translate(-50%, -50%) scale(1.9); opacity: 0.42; }
+.cursor-hover .cursor-dot-i  { transform: translate(-50%, -50%) scale(0.45); }
+
+/* While pressing: gentle collapse for tactile feedback. */
+.cursor-down .cursor-glow-i { transform: translate(-50%, -50%) scale(0.8); }
+.cursor-down .cursor-dot-i  { transform: translate(-50%, -50%) scale(0.85); }
+
+/* Locked onto an element: the halo morphs to wrap it (size/shape set inline by
+   JS) and glides over with a transition. The tail hides; the dot keeps tracking
+   the pointer for precision. Placed after the hover rules so it wins. */
+.cursor-locked .cursor-glow {
+  transition: transform 0.28s var(--ease-out, ease), opacity 0.25s var(--ease-out, ease);
+}
+.cursor-locked .cursor-glow-i {
+  transform: translate(-50%, -50%) scale(1);
+  background: transparent;
+  filter: none;
+  opacity: 1;
+  /* just a thin few-px light hugging the element's edge */
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent) 60%, transparent),
+    0 0 8px 1px color-mix(in srgb, var(--accent) 55%, transparent);
+  transition: width 0.28s var(--ease-out, ease), height 0.28s var(--ease-out, ease),
+              border-radius 0.28s var(--ease-out, ease), transform 0.28s var(--ease-out, ease),
+              box-shadow 0.2s var(--ease-out, ease);
+}
+.cursor-locked .cursor-trail { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-dot-i,
+  .cursor-glow-i { transition: none; }
+}

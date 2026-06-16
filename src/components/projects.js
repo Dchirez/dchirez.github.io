@@ -5,6 +5,11 @@ import { Ic, Badge, Button, TechBadge, DEV_BASE, TECH_ICON, TECH_NAME } from '..
 
 const techList = ['java', 'c', 'web', 'typescript', 'kotlin', 'angular', 'python'];
 
+// Single shared resize handler for the coverflow — replaced (not stacked) each
+// time the section re-renders on a language/theme switch, so listeners and
+// stale-DOM references never accumulate.
+let cfResizeHandler = null;
+
 function logoMarkup(p, imgSize, fontSize) {
   return p.logo
     ? `<img src="${LOGO(p.logo)}" alt="" style="width:${imgSize}px;height:${imgSize}px;object-fit:contain" loading="lazy">`
@@ -31,11 +36,9 @@ function projectCardHTML(p, lang, t) {
 
 function coverflowHTML(projects) {
   const n = projects.length;
-  const radius = 460;
   const theta = 360 / n;
   const cards = projects.map((p, i) => `
-    <div class="cf-card" data-cf-index="${i}" data-id="${p.id}"
-         style="transform:rotateY(${i * theta}deg) translateZ(${radius}px)">
+    <div class="cf-card" data-cf-index="${i}" data-id="${p.id}">
       <div class="cf-inner">
         <div class="cf-logo">${logoMarkup(p, 58, 40)}</div>
         <div class="cf-title">${p.titre}</div>
@@ -44,13 +47,13 @@ function coverflowHTML(projects) {
     </div>`).join('');
   return `
     <div class="coverflow">
-      <button class="icon-btn cf-nav" data-cf="-1" aria-label="prev" style="width:48px;height:48px;flex-shrink:0">${Ic.arrowLeft()}</button>
+      <button class="icon-btn cf-nav" data-cf="-1" aria-label="prev">${Ic.arrowLeft()}</button>
       <div class="cf-viewport">
-        <div class="cf-stage" data-cf-radius="${radius}" data-cf-theta="${theta}" style="transform:translateZ(-${radius}px) rotateY(0deg)">
+        <div class="cf-stage" data-cf-theta="${theta}">
           ${cards}
         </div>
       </div>
-      <button class="icon-btn cf-nav" data-cf="1" aria-label="next" style="width:48px;height:48px;flex-shrink:0">${Ic.arrowRight()}</button>
+      <button class="icon-btn cf-nav" data-cf="1" aria-label="next">${Ic.arrowRight()}</button>
     </div>`;
 }
 
@@ -149,31 +152,86 @@ export function initProjects(scope, t, lang) {
   });
 
   /* ---------- coverflow ---------- */
+  const coverflow = section.querySelector('.coverflow');
   const stage = section.querySelector('.cf-stage');
+  const viewport = section.querySelector('.cf-viewport');
   const cards = [...section.querySelectorAll('.cf-card')];
   const n = cards.length;
-  const radius = Number(stage.dataset.cfRadius);
   const theta = Number(stage.dataset.cfTheta);
+  // idx is kept continuous (never wrapped with %) so the stage keeps spinning
+  // in the same direction across the first/last boundary — a seamless loop
+  // instead of a ~360° back-spin reset. The active card is idx modulo n.
   let idx = 0;
+  let radius = 460;
+  let peekNeighbors = false; // show side previews only when there's room (desktop)
+  const activeIndex = () => ((idx % n) + n) % n;
+
+  // Scale the whole 3D rig to the viewport so the front card always fits.
+  // The orbit radius stays proportional to the card width (~2×) so the
+  // neighbouring cards sit just beyond the active one instead of overlapping
+  // its sides (which read as dark bands in dark mode).
+  function applyGeometry() {
+    const vw = window.innerWidth;
+    const cardW = vw <= 380 ? 200 : vw <= 600 ? 230 : 300;
+    const cardH = vw <= 600 ? 196 : 220;
+    // Only large screens have enough width to show the side cards as readable
+    // previews; below that they'd be clipped to dark bars, so we hide them.
+    peekNeighbors = vw > 860;
+    radius = Math.round(cardW * 2.05);
+    coverflow.style.setProperty('--cf-w', `${cardW}px`);
+    coverflow.style.setProperty('--cf-h', `${cardH}px`);
+    coverflow.style.setProperty('--cf-vh', `${cardH + 80}px`);
+    // Set the critical dimensions inline too: inline styles beat any cached
+    // stylesheet, so the card size always matches the radius the JS computes —
+    // even if a browser is still serving an older primitives.css.
+    viewport.style.height = `${cardH + 80}px`;
+    cards.forEach((card, i) => {
+      card.style.width = `${cardW}px`;
+      card.style.height = `${cardH}px`;
+      card.style.marginLeft = `${-cardW / 2}px`;
+      card.style.marginTop = `${-cardH / 2}px`;
+      card.style.transform = `rotateY(${i * theta}deg) translateZ(${radius}px)`;
+    });
+  }
 
   function renderCover() {
     stage.style.transform = `translateZ(-${radius}px) rotateY(${-idx * theta}deg)`;
+    const active = activeIndex();
     cards.forEach((card, i) => {
-      let diff = Math.abs((i - idx + n) % n);
+      let diff = Math.abs(i - active);
       if (diff > n / 2) diff = n - diff;
-      card.style.opacity = diff === 0 ? '1' : '0.32';
-      card.style.pointerEvents = diff > 2 ? 'none' : 'auto';
-      card.classList.toggle('is-active', i === idx);
+      // On large screens the immediate neighbours peek at low opacity; on
+      // smaller screens they'd be clipped to dark bars, so only the active
+      // card is shown and it cross-fades + spins in on navigation.
+      const visible = diff === 0 || (diff === 1 && peekNeighbors);
+      card.style.opacity = diff === 0 ? '1' : visible ? '0.3' : '0';
+      card.style.pointerEvents = visible ? 'auto' : 'none';
+      card.classList.toggle('is-active', diff === 0);
     });
   }
+  applyGeometry();
   renderCover();
-  const go = (d) => { idx = (idx + d + n) % n; renderCover(); };
+  const go = (d) => { idx += d; renderCover(); };
+
+  // Re-scale on resize / orientation change without losing the current card.
+  if (cfResizeHandler) window.removeEventListener('resize', cfResizeHandler);
+  let resizeRaf = 0;
+  cfResizeHandler = () => {
+    cancelAnimationFrame(resizeRaf);
+    resizeRaf = requestAnimationFrame(() => { applyGeometry(); renderCover(); });
+  };
+  window.addEventListener('resize', cfResizeHandler);
 
   section.querySelectorAll('.cf-nav').forEach((btn) =>
     btn.addEventListener('click', () => go(Number(btn.dataset.cf))));
   cards.forEach((card, i) => card.addEventListener('click', () => {
-    if (i === idx) openModal(card.dataset.id);
-    else { idx = i; renderCover(); }
+    const active = activeIndex();
+    if (i === active) { openModal(card.dataset.id); return; }
+    // rotate by the shortest path to the clicked card, keeping idx continuous
+    let delta = i - active;
+    if (delta > n / 2) delta -= n;
+    if (delta < -n / 2) delta += n;
+    go(delta);
   }));
 
   /* ---------- modal ---------- */

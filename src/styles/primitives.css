@@ -89,11 +89,16 @@
 .coverflow { display: flex; align-items: center; justify-content: center; gap: 16px; }
 /* Clip the 3D side cards inside the carousel so they never push the page wider
    than the screen (overflow:hidden works on every browser, incl. older Safari). */
-.cf-viewport { flex: 1; height: 300px; perspective: 1400px; position: relative; overflow: hidden; }
+.cf-viewport { flex: 1; min-width: 0; height: var(--cf-vh, 300px); perspective: 1400px; position: relative; overflow: hidden; }
 .cf-stage { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform 0.8s var(--ease-out); }
+/* Card size is driven by CSS vars so the JS can scale the whole 3D rig
+   (card + orbit radius) down on small screens — the front card must fit
+   inside the viewport or it gets clipped on the sides. */
 .cf-card {
-  position: absolute; left: 50%; top: 50%; width: 300px; height: 220px;
-  margin-left: -150px; margin-top: -110px; cursor: pointer; transition: opacity 0.6s;
+  position: absolute; left: 50%; top: 50%;
+  width: var(--cf-w, 300px); height: var(--cf-h, 220px);
+  margin-left: calc(var(--cf-w, 300px) / -2); margin-top: calc(var(--cf-h, 220px) / -2);
+  cursor: pointer; transition: opacity 0.6s;
 }
 .cf-inner {
   width: 100%; height: 100%; background: var(--surface-card); border: 1px solid var(--border);
@@ -108,6 +113,14 @@
 }
 .cf-title { font-family: var(--font-display); font-weight: 700; font-size: var(--text-xl); color: var(--text-strong); }
 .cf-tech { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+.cf-nav { width: 48px; height: 48px; flex-shrink: 0; }
+
+@media (max-width: 600px) {
+  .coverflow { gap: 8px; }
+  .cf-nav { width: 40px; height: 40px; }
+  .cf-logo { width: 64px; height: 64px; margin-bottom: 10px; }
+  .cf-title { font-size: var(--text-lg); }
+}
 
 /* ---------- Misc kit pieces ---------- */
 .nav-cta { margin-left: 4px; display: inline-flex; gap: 10px; }

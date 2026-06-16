@@ -6,6 +6,7 @@ import { PORTFOLIO } from './data.js';
 import { STR } from './i18n.js';
 import { Ic } from './ui.js';
 import { mountGlobe } from './components/globe.js';
+import { mountCursor } from './components/cursor.js';
 import { initProjects, projectsSectionHTML } from './components/projects.js';
 import {
   navHTML, heroHTML, skillsHTML, flagshipHTML,
@@ -138,3 +139,4 @@ window.addEventListener('resize', updateProgress);
 
 applyTheme();
 render();
+mountCursor();
