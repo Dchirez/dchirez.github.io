@@ -56,7 +56,7 @@ export const PORTFOLIO = {
       descFr: "Synthétiseur musical lisant des partitions XML.", descEn: 'Musical synthesizer reading XML sheet music.',
       detailsFr: "Projet d'équipe (4) en méthode agile : un synthétiseur capable de lire et interpréter des partitions au format XML, développé en Java avec automatisation Gradle.",
       detailsEn: 'Team project (4), agile method: a synthesizer able to read and interpret XML sheet music, built in Java with Gradle automation.' },
-    { id: 'mariage', icon: '💍', titre: 'UnOuiPourLaVie', techDisplay: 'HTML / CSS', techs: ['web'], type: 'univ', github: 'https://github.com/Dchirez/Site-web-UnOuiPourLaVie',
+    { id: 'mariage', icon: '💍', titre: 'UnOuiPourLaVie', techDisplay: 'HTML / CSS', techs: ['web'], type: 'univ', github: 'https://github.com/Dchirez/Site-web-UnOuiPourLaVie', demo: 'https://dchirez.fr/Site-web-UnOuiPourLaVie/',
       descFr: "Site vitrine complet pour organiser un mariage.", descEn: 'Complete showcase site for wedding planning.',
       detailsFr: "Site vitrine en HTML / CSS pur, conçu après analyse des sites de Wedding Planners de référence. Consolidation des bases en intégration web, design responsive et structuration sémantique.",
       detailsEn: 'Showcase site in pure HTML / CSS, designed after analysing reference Wedding Planner sites. Consolidated foundations in web integration, responsive design and semantic structure.' },

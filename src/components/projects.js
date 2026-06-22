@@ -95,8 +95,11 @@ function modalHTML(p, lang, t) {
   const isUniv = p.type === 'univ';
   const badge = Badge({ tone: isUniv ? 'accent' : 'violet', children: isUniv ? t.univLong : t.persoLong });
   const techs = p.techs.map((tk) => TechBadge(tk)).join('');
-  const ghBtn = p.github
-    ? `<div style="margin-top:28px">${Button({ variant: 'gradient', href: p.github, target: '_blank', icon: Ic.github(), iconRight: Ic.arrowUpRight(), children: t.viewGithub })}</div>`
+  const demoBtn = p.demo
+    ? Button({ variant: 'primary', href: p.demo, target: '_blank', icon: Ic.globe(), iconRight: Ic.arrowUpRight(), children: t.viewDemo })
+    : '';
+  const ghBtn = (p.github || p.demo)
+    ? `<div style="margin-top:28px;display:flex;flex-wrap:wrap;gap:12px">${demoBtn}${p.github ? Button({ variant: 'gradient', href: p.github, target: '_blank', icon: Ic.github(), iconRight: Ic.arrowUpRight(), children: t.viewGithub }) : ''}</div>`
     : '';
   return `
     <div class="modal-overlay" data-modal-overlay>

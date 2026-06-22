@@ -15,7 +15,7 @@ export const STR = {
     contactLead: 'Une opportunité d’alternance, une question ? Écris-moi.',
     contactSent: 'Message envoyé — merci ! Je reviens vers toi vite.',
     fName: 'Nom', fSubject: 'Sujet', phName: 'Votre nom ou entreprise', phSubject: 'Stage, alternance, autre…', phMessage: 'Détaillez votre demande',
-    send: 'Envoyer', rights: 'Tous droits réservés.', cv: 'CV', viewGithub: 'Voir sur GitHub',
+    send: 'Envoyer', rights: 'Tous droits réservés.', cv: 'CV', viewGithub: 'Voir sur GitHub', viewDemo: 'Voir le site en ligne',
     univShort: 'Univ.', persoShort: 'Perso', univLong: 'Universitaire', persoLong: 'Personnel',
   },
   en: {
@@ -33,7 +33,7 @@ export const STR = {
     contactLead: 'A work-study opportunity, a question? Drop me a line.',
     contactSent: 'Message sent — thanks! I’ll get back to you soon.',
     fName: 'Name', fSubject: 'Subject', phName: 'Your name or company', phSubject: 'Internship, work-study, other…', phMessage: 'Tell me more',
-    send: 'Send', rights: 'All rights reserved.', cv: 'Resume', viewGithub: 'View on GitHub',
+    send: 'Send', rights: 'All rights reserved.', cv: 'Resume', viewGithub: 'View on GitHub', viewDemo: 'View live site',
     univShort: 'Acad.', persoShort: 'Pers.', univLong: 'Academic', persoLong: 'Personal',
   },
 };
