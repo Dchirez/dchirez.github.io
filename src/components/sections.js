@@ -72,7 +72,7 @@ export function heroHTML(t, lang) {
             ${StatusPill(lang === 'fr' ? ID.statusFr : ID.statusEn)}
           </div>
           <div class="stat-row">
-            <div class="stat"><div class="n">12</div><div class="l">${t.statProjects}</div></div>
+            <div class="stat"><div class="n">${PORTFOLIO.projects.length}</div><div class="l">${t.statProjects}</div></div>
             <div class="stat"><div class="n">7</div><div class="l">${t.statTech}</div></div>
             <div class="stat"><div class="n grad">2026</div><div class="l">${t.statAvail}</div></div>
           </div>
