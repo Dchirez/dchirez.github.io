@@ -23,8 +23,9 @@ export const TECH_ICON = {
   java: 'java/java-original.svg', c: 'c/c-original.svg', web: 'html5/html5-original.svg',
   typescript: 'typescript/typescript-original.svg', kotlin: 'kotlin/kotlin-original.svg',
   angular: 'angular/angular-original.svg', python: 'python/python-original.svg',
+  react: 'react/react-original.svg',
 };
-export const TECH_NAME = { java: 'Java', c: 'C', web: 'Web', typescript: 'TypeScript', kotlin: 'Kotlin', angular: 'Angular', python: 'Python' };
+export const TECH_NAME = { java: 'Java', c: 'C', web: 'Web', typescript: 'TypeScript', kotlin: 'Kotlin', angular: 'Angular', python: 'Python', react: 'React' };
 
 const escapeAttr = (s = '') => String(s).replace(/"/g, '&quot;');
 

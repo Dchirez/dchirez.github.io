@@ -3,7 +3,7 @@
 import { PORTFOLIO, LOGO } from '../data.js';
 import { Ic, Badge, Button, TechBadge, DEV_BASE, TECH_ICON, TECH_NAME } from '../ui.js';
 
-const techList = ['java', 'c', 'web', 'typescript', 'kotlin', 'angular', 'python'];
+const techList = ['java', 'c', 'web', 'react', 'typescript', 'kotlin', 'angular', 'python'];
 
 // Single shared resize handler for the coverflow — replaced (not stacked) each
 // time the section re-renders on a language/theme switch, so listeners and
