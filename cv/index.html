@@ -130,11 +130,47 @@
     .strengths{grid-template-columns:1fr}
     .head .name{font-size:28px}
   }
+  /* Impression : le CV doit tenir sur une seule page A4.
+     La version web reste complète ; seul le PDF est condensé. */
   @media print{
-    body{background:#fff;padding:0}
+    @page{size:A4;margin:10mm}
+    html,body{background:#fff;padding:0}
+    /* Conserve les aplats de couleur (accents, puces, badges) à l'impression. */
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
     .toolbar{display:none}
-    .sheet{box-shadow:none;border-radius:0;max-width:100%;animation:none;border:none}
+    /* La feuille conserve sa mise en page d'origine (sidebar large, aucun retour
+       à la ligne parasite) et l'ensemble est mis à l'échelle pour occuper très
+       exactement la largeur imprimable : 860 × 0.835 = 718 px = 190 mm. */
+    .sheet{box-shadow:none;border-radius:0;animation:none;border:none;margin:0 auto;
+           width:860px;max-width:860px;grid-template-columns:275px 1fr;zoom:.835}
     .proj:hover,.entry:hover{transform:none}
+
+    /* Projets retirés du PDF : ils sont détaillés sur le portfolio en ligne. */
+    .block--projects{display:none}
+    /* Seul le stage garde ses détails ; les autres expériences se limitent
+       au poste, à l'employeur et à la date. */
+    .entry:not(.entry--key) ul,
+    .entry:not(.entry--key) .e-desc{display:none}
+
+    /* Compactage des espacements pour rentrer dans les 277 mm utiles. */
+    .side{padding:22px 18px 24px}
+    .main{padding:26px 28px 28px}
+    .avatar-wrap{width:96px;height:96px;margin-bottom:14px}
+    .side .role{margin-bottom:16px}
+    .side-block{margin-bottom:15px}
+    .qr-card img{width:88px;height:88px}
+    .head{margin-bottom:16px}
+    .head .name{font-size:29px}
+    .head .intro{margin-top:10px;line-height:1.5}
+    .strengths{margin-bottom:16px;gap:9px}
+    .strength{padding:11px}
+    .strength .s-ic{margin-bottom:6px}
+    section.block{margin-bottom:16px}
+    .sec-title{margin-bottom:11px}
+    .entry{margin-bottom:9px}
+
+    /* Évite qu'une entrée soit coupée si le contenu venait à déborder. */
+    .entry,.strength,.side-block{break-inside:avoid}
   }
 </style>
 </head>
@@ -255,12 +291,12 @@
       <header class="head">
         <h1 class="name">Damien <b>Chirez</b></h1>
         <p class="title">
-          <span data-fr>Alternance en développement informatique — dès septembre 2026</span>
-          <span data-en>Work-Study in Software Development — from September 2026</span>
+          <span data-fr>Alternance en développement informatique — année 2026 / 2027</span>
+          <span data-en>Work-Study in Software Development — 2026 / 2027</span>
         </p>
         <p class="intro">
-          <span data-fr>Étudiant en informatique à la recherche d'une alternance en développement à partir de septembre 2026. Au-delà de la technique, mes expériences variées (restauration, logistique, vie associative) m'ont forgé un vrai sens du contact, de la rigueur sous pression et du travail en équipe — des atouts rares chez un profil technique.</span>
-          <span data-en>Computer science student looking for a work-study contract in development starting September 2026. Beyond the technical side, my diverse experiences (hospitality, logistics, student life) have given me real interpersonal skills, composure under pressure and teamwork — assets that are rare in a technical profile.</span>
+          <span data-fr>Étudiant en 3ᵉ année de BUT Informatique à la recherche d'une alternance en développement pour l'année 2026-2027. Au-delà de la technique, mes expériences variées (restauration, logistique, vie associative) m'ont forgé un vrai sens du contact, de la rigueur sous pression et du travail en équipe — des atouts rares chez un profil technique.</span>
+          <span data-en>Third-year Computer Science student (BUT) looking for a work-study contract in development for 2026-2027. Beyond the technical side, my diverse experiences (hospitality, logistics, student life) have given me real interpersonal skills, composure under pressure and teamwork — assets that are rare in a technical profile.</span>
         </p>
       </header>
 
@@ -292,10 +328,10 @@
         <div class="timeline">
           <div class="entry">
             <div class="e-head">
-              <h4><span data-fr>2ᵉ année de BUT Informatique</span><span data-en>2nd year — BUT Computer Science</span></h4>
-              <span class="e-date">2025 – 2026</span>
+              <h4><span data-fr>3ᵉ année de BUT Informatique</span><span data-en>3rd year — BUT Computer Science</span></h4>
+              <span class="e-date">2026 – 2027</span>
             </div>
-            <p class="e-org"><b>IUT de Lens</b> — <span data-fr>1ʳᵉ année validée</span><span data-en>1st year completed</span></p>
+            <p class="e-org"><b>IUT de Lens</b> — <span data-fr>1ʳᵉ et 2ᵉ années validées</span><span data-en>1st and 2nd years completed</span></p>
           </div>
           <div class="entry">
             <div class="e-head">
@@ -315,7 +351,7 @@
           <span data-fr>Expériences professionnelles</span><span data-en>Work Experience</span>
         </h2>
         <div class="timeline">
-          <div class="entry">
+          <div class="entry entry--key">
             <div class="e-head">
               <h4><span data-fr>Stage Développeur</span><span data-en>Developer Intern</span></h4>
               <span class="e-date"><span data-fr>Mai – Juil. 2026</span><span data-en hidden>May – Jul 2026</span></span>
@@ -376,8 +412,8 @@
         </div>
       </section>
 
-      <!-- Projects -->
-      <section class="block">
+      <!-- Projects (visibles en ligne, retirés du PDF imprimé pour tenir sur une page) -->
+      <section class="block block--projects">
         <h2 class="sec-title">
           <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
           <span data-fr>Mes Projets</span><span data-en>Projects</span>
