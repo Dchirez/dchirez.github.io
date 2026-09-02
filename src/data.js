@@ -6,10 +6,10 @@ export const PORTFOLIO = {
     handle: 'Damien.Dev',
     roleFr: 'Étudiant en BUT Informatique',
     roleEn: 'Computer Science Student',
-    pitchFr: "Je conçois et développe des applications — du jeu console en C au fullstack Angular / Python. À la recherche d'une alternance en développement dès septembre 2026.",
-    pitchEn: 'I design and build applications — from C console games to Angular / Python fullstack. Open to a development work-study (alternance) from September 2026.',
-    statusFr: 'Open to work · Alternance dès septembre 2026',
-    statusEn: 'Open to work · Alternance from September 2026',
+    pitchFr: "Je conçois et développe des applications — du jeu console en C au fullstack Angular / Python. À la recherche d'une alternance en développement pour l'année 2026-2027.",
+    pitchEn: 'I design and build applications — from C console games to Angular / Python fullstack. Open to a development work-study (alternance) for 2026-2027.',
+    statusFr: 'Open to work · Alternance 2026 – 2027',
+    statusEn: 'Open to work · Work-study 2026 – 2027',
     email: 'dchirez59@gmail.com',
     github: 'https://github.com/Dchirez?tab=repositories',
     linkedin: 'https://www.linkedin.com/in/damien-chirez-b0aa66355/',
@@ -28,7 +28,7 @@ export const PORTFOLIO = {
     { tech: 'gradle', label: 'Gradle' }, { tech: 'react', label: 'React' },
   ],
   formations: [
-    { titreFr: '2ᵉ année — BUT Informatique', titreEn: '2nd year — IT Bachelor', org: 'IUT de Lens', years: '2025 – 2026', current: true },
+    { titreFr: '3ᵉ année — BUT Informatique', titreEn: '3rd year — IT Bachelor', org: 'IUT de Lens', years: '2026 – 2027', current: true },
     { titreFr: 'Baccalauréat Général', titreEn: 'High School Diploma', org: 'Lycée Jean Bart, Dunkerque', years: '2024 – 2025', current: false },
   ],
   projects: [
