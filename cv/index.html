@@ -118,6 +118,11 @@
   .proj .p-stack{margin-top:8px;display:flex;flex-wrap:wrap;gap:4px}
   .proj .p-stack span{font-family:var(--font-mono);font-size:9.5px;font-weight:500;background:var(--surface-sunken);border:1px solid var(--border);color:var(--text-muted);padding:2px 7px;border-radius:5px}
 
+  /* Renvoi vers le portfolio, sous la liste des projets */
+  .proj-note{margin-top:14px;font-size:12px;color:var(--text-muted);border-left:3px solid var(--accent);padding-left:12px;line-height:1.5}
+  .proj-note a{color:var(--accent);font-weight:600;text-decoration:none}
+  .proj-note a:hover{text-decoration:underline}
+
   [data-en]{display:none}
   body.en [data-fr]{display:none}
   body.en [data-en]{display:revert}
@@ -140,13 +145,23 @@
     .toolbar{display:none}
     /* La feuille conserve sa mise en page d'origine (sidebar large, aucun retour
        à la ligne parasite) et l'ensemble est mis à l'échelle pour occuper très
-       exactement la largeur imprimable : 860 × 0.835 = 718 px = 190 mm. */
+       exactement la largeur imprimable : 880 × 0.816 = 718 px = 190 mm. */
     .sheet{box-shadow:none;border-radius:0;animation:none;border:none;margin:0 auto;
-           width:860px;max-width:860px;grid-template-columns:275px 1fr;zoom:.835}
+           width:880px;max-width:880px;grid-template-columns:282px 1fr;zoom:.816}
     .proj:hover,.entry:hover{transform:none}
 
-    /* Projets retirés du PDF : ils sont détaillés sur le portfolio en ligne. */
-    .block--projects{display:none}
+    /* Projets : version condensée dans le PDF — uniquement les projets
+       personnels, réduits au nom + aux technos (les descriptions et les projets
+       universitaires restent visibles sur la version web). */
+    .proj-group--univ{display:none}
+    .proj--noprint{display:none}          /* le renvoi vers dchirez.fr le remplace */
+    .proj .p-desc{display:none}
+    .proj{padding:6px 9px}
+    .proj-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+    .proj .p-name{margin-bottom:0}
+    .proj .p-stack{margin-top:4px}
+    .proj-group{margin-bottom:0}
+    .proj-note{margin-top:10px;font-size:11px;line-height:1.4}
     /* Seul le stage garde ses détails ; les autres expériences se limitent
        au poste, à l'employeur et à la date. */
     .entry:not(.entry--key) ul,
@@ -154,20 +169,20 @@
 
     /* Compactage des espacements pour rentrer dans les 277 mm utiles. */
     .side{padding:22px 18px 24px}
-    .main{padding:26px 28px 28px}
+    .main{padding:22px 26px 22px}
     .avatar-wrap{width:96px;height:96px;margin-bottom:14px}
     .side .role{margin-bottom:16px}
     .side-block{margin-bottom:15px}
     .qr-card img{width:88px;height:88px}
-    .head{margin-bottom:16px}
+    .head{margin-bottom:12px}
     .head .name{font-size:29px}
-    .head .intro{margin-top:10px;line-height:1.5}
-    .strengths{margin-bottom:16px;gap:9px}
-    .strength{padding:11px}
-    .strength .s-ic{margin-bottom:6px}
-    section.block{margin-bottom:16px}
-    .sec-title{margin-bottom:11px}
-    .entry{margin-bottom:9px}
+    .head .intro{margin-top:9px;font-size:12.5px;line-height:1.45}
+    .strengths{margin-bottom:12px;gap:8px}
+    .strength{padding:9px 10px}
+    .strength .s-ic{margin-bottom:5px}
+    section.block{margin-bottom:12px}
+    .sec-title{margin-bottom:8px}
+    .entry{margin-bottom:7px}
 
     /* Évite qu'une entrée soit coupée si le contenu venait à déborder. */
     .entry,.strength,.side-block{break-inside:avoid}
@@ -412,14 +427,14 @@
         </div>
       </section>
 
-      <!-- Projects (visibles en ligne, retirés du PDF imprimé pour tenir sur une page) -->
+      <!-- Projects (complets en ligne ; condensés dans le PDF : projets perso, sans description) -->
       <section class="block block--projects">
         <h2 class="sec-title">
           <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
           <span data-fr>Mes Projets</span><span data-en>Projects</span>
         </h2>
 
-        <div class="proj-group">
+        <div class="proj-group proj-group--univ">
           <p class="pg-label"><span data-fr>Projets universitaires</span><span data-en>University projects</span></p>
           <div class="proj-grid">
             <div class="proj">
@@ -449,6 +464,16 @@
           <p class="pg-label"><span data-fr>Projets personnels</span><span data-en>Personal projects</span></p>
           <div class="proj-grid">
             <div class="proj">
+              <p class="p-name">GMB Manager</p>
+              <p class="p-desc"><span data-fr>Gestion des fiches Google My Business (OAuth 2.0, API Business Profile).</span><span data-en>Google My Business profile management (OAuth 2.0, Business Profile API).</span></p>
+              <div class="p-stack"><span>Angular</span><span>Python</span><span>TypeScript</span></div>
+            </div>
+            <div class="proj">
+              <p class="p-name"><span data-fr>Météo</span><span data-en>Weather</span></p>
+              <p class="p-desc"><span data-fr>Application météo mobile-first installable (PWA), API Open-Meteo.</span><span data-en>Mobile-first installable weather app (PWA), Open-Meteo API.</span></p>
+              <div class="p-stack"><span>React</span><span>Vite</span><span>PWA</span></div>
+            </div>
+            <div class="proj">
               <p class="p-name"><span data-fr>Coffre-Fort</span><span data-en>Password Vault</span></p>
               <p class="p-desc"><span data-fr>Stockage crypté des identifiants + auto-remplissage des formulaires.</span><span data-en>Encrypted credential storage + form auto-fill.</span></p>
               <div class="p-stack"><span>Java</span><span>TypeScript</span></div>
@@ -468,13 +493,19 @@
               <p class="p-desc"><span data-fr>Casse-tête 3×3 contrôlé aux gestes de la main (webcam).</span><span data-en>3×3 puzzle controlled by hand gestures (webcam).</span></p>
               <div class="p-stack"><span>JavaScript</span><span>MediaPipe</span></div>
             </div>
-            <div class="proj">
+            <div class="proj proj--noprint">
               <p class="p-name">Portfolio</p>
               <p class="p-desc"><span data-fr>Portfolio personnel (en cours).</span><span data-en>Personal portfolio (in progress).</span></p>
               <div class="p-stack"><span>JavaScript</span></div>
             </div>
           </div>
         </div>
+
+        <p class="proj-note">
+          <span data-fr>Tous mes projets sont détaillés — avec démonstrations en ligne et code source — sur </span>
+          <span data-en>All my projects are detailed — with live demos and source code — at </span>
+          <a href="https://dchirez.fr" target="_blank" rel="noopener">dchirez.fr</a>
+        </p>
       </section>
     </main>
   </div>
