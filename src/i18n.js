@@ -17,6 +17,9 @@ export const STR = {
     fName: 'Nom', fSubject: 'Sujet', phName: 'Votre nom ou entreprise', phSubject: 'Stage, alternance, autre…', phMessage: 'Détaillez votre demande',
     send: 'Envoyer', rights: 'Tous droits réservés.', cv: 'CV', viewGithub: 'Voir sur GitHub', viewDemo: 'Voir le site en ligne',
     univShort: 'Univ.', persoShort: 'Perso', univLong: 'Universitaire', persoLong: 'Personnel',
+    gamesNav: 'Jeux', gamesEyebrow: 'Salle de jeux', gamesTitle: 'Tous mes jeux, au même endroit',
+    gamesLead: 'jeux jouables dans le navigateur, sans compte ni installation. Défi du jour, succès, statistiques et parties en ligne entre amis.',
+    gamesCta: 'Entrer dans la salle de jeux',
   },
   en: {
     nav: { projects: 'Projects', skills: 'Skills', education: 'Education', contact: 'Contact', cta: 'Contact me' },
@@ -35,5 +38,8 @@ export const STR = {
     fName: 'Name', fSubject: 'Subject', phName: 'Your name or company', phSubject: 'Internship, work-study, other…', phMessage: 'Tell me more',
     send: 'Send', rights: 'All rights reserved.', cv: 'Resume', viewGithub: 'View on GitHub', viewDemo: 'View live site',
     univShort: 'Acad.', persoShort: 'Pers.', univLong: 'Academic', persoLong: 'Personal',
+    gamesNav: 'Games', gamesEyebrow: 'Game room', gamesTitle: 'All my games in one place',
+    gamesLead: 'games playable in the browser, no account or install needed. Daily challenge, achievements, stats and online matches with friends (in French).',
+    gamesCta: 'Enter the game room',
   },
 };

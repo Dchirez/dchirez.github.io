@@ -247,3 +247,18 @@ html { overflow-x: clip; }
      responsive layout (horizontal scroll). Wrapping can never overflow. */
   .filter-bar { gap: 6px; }
 }
+
+/* ---------- Salle de jeux ---------- */
+.salle-jeux { position: relative; overflow: hidden; display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center;
+  padding: 48px; border-radius: var(--radius-2xl); background: var(--surface-card); border: 1px solid var(--border); box-shadow: var(--shadow-md); }
+.salle-jeux::before { content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(120% 120% at 0% 100%, var(--accent-soft) 0%, transparent 50%), radial-gradient(120% 120% at 100% 0%, var(--accent-2-soft) 0%, transparent 55%); }
+.salle-jeux > * { position: relative; }
+.salle-icones { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.salle-icone { aspect-ratio: 1; display: grid; place-items: center; font-size: 34px; border-radius: var(--radius-lg);
+  background: var(--surface-sunken); border: 1px solid var(--border); transition: transform var(--dur-base) var(--ease-spring); }
+.salle-jeux:hover .salle-icone:nth-child(odd) { transform: translateY(-4px) rotate(-4deg); }
+.salle-jeux:hover .salle-icone:nth-child(even) { transform: translateY(3px) rotate(4deg); }
+@media (max-width: 820px) { .salle-jeux { grid-template-columns: 1fr; padding: 32px; } }
+@media (max-width: 600px) { .salle-jeux { padding: 22px; border-radius: var(--radius-xl); } .salle-icone { font-size: 26px; } }
+@media (prefers-reduced-motion: reduce) { .salle-icone { transition: none; } }

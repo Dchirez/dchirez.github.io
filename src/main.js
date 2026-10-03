@@ -10,7 +10,7 @@ import { mountCursor } from './components/cursor.js';
 import { initProjects, projectsSectionHTML } from './components/projects.js';
 import {
   navHTML, heroHTML, skillsHTML, flagshipHTML,
-  formationsHTML, contactHTML, footerHTML,
+  gamesHTML, formationsHTML, contactHTML, footerHTML,
 } from './components/sections.js';
 
 const app = document.getElementById('root');
@@ -46,6 +46,7 @@ function render() {
       ${skillsHTML(t)}
       ${flagshipHTML(t, lang)}
       ${projectsSectionHTML(t, lang)}
+      ${gamesHTML(t)}
       ${formationsHTML(t, lang)}
       ${contactHTML(t)}
       ${footerHTML(t)}

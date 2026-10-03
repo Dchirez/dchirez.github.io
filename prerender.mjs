@@ -32,6 +32,7 @@ try {
       ${S.skillsHTML(t)}
       ${S.flagshipHTML(t, lang)}
       ${projectsSectionHTML(t, lang)}
+      ${S.gamesHTML(t)}
       ${S.formationsHTML(t, lang)}
       ${S.contactHTML(t)}
       ${S.footerHTML(t)}

@@ -1,4 +1,4 @@
-/* Nav, Hero, Skills, Flagship, Formations, Contact, Footer — HTML builders. */
+/* Nav, Hero, Skills, Flagship, Games, Formations, Contact, Footer — HTML builders. */
 import { PORTFOLIO, LOGO } from '../data.js';
 import { Ic, Button, StatusPill, TechBadge } from '../ui.js';
 
@@ -23,6 +23,7 @@ export function navHTML(t, lang, theme) {
         <a href="#top" class="brand">Damien<b>.Dev</b></a>
         <div class="nav-links">
           <a class="nav-link" href="#projets">${t.nav.projects}</a>
+          <a class="nav-link" href="#jeux">${t.gamesNav}</a>
           <a class="nav-link" href="#competences">${t.nav.skills}</a>
           <a class="nav-link" href="#parcours">${t.nav.education}</a>
           <a class="nav-link" href="#contact">${t.nav.contact}</a>
@@ -39,6 +40,7 @@ export function navHTML(t, lang, theme) {
       </div>
       <div class="drawer-links">
         <a href="#projets" data-drawer-link>${t.nav.projects}</a>
+        <a href="#jeux" data-drawer-link>${t.gamesNav}</a>
         <a href="#competences" data-drawer-link>${t.nav.skills}</a>
         <a href="#parcours" data-drawer-link>${t.nav.education}</a>
         <a href="#contact" data-drawer-link>${t.nav.contact}</a>
@@ -144,6 +146,29 @@ export function flagshipHTML(t, lang) {
             ${scoreRingHTML(92)}
             <div style="display:flex;flex-direction:column;gap:12px">${stats}</div>
           </div>
+        </div>
+      </div>
+    </section>`;
+}
+
+/* ---------- SALLE DE JEUX ----------
+   Les jeux jouables sont les projets « web » qui ont une démo, hors les
+   sites qui ne sont pas des jeux. */
+const NON_JEUX = ['meteo', 'mariage'];
+export function gamesHTML(t) {
+  const jeux = PORTFOLIO.projects.filter((p) => p.demo && p.techs.includes('web') && !NON_JEUX.includes(p.id));
+  const icones = jeux.map((p) => `<span class="salle-icone" title="${p.titre}">${p.icon || '🎮'}</span>`).join('');
+  return `
+    <section class="section" id="jeux">
+      <div class="container">
+        <div class="salle-jeux">
+          <div>
+            <span class="eyebrow">${Ic.sparkle()} ${t.gamesEyebrow}</span>
+            <h2 class="h-section" style="margin-top:14px">${t.gamesTitle}</h2>
+            <p class="lead" style="margin:14px 0 26px">${jeux.length} ${t.gamesLead}</p>
+            ${Button({ variant: 'gradient', href: '/games/', iconRight: Ic.arrowRight(), children: t.gamesCta })}
+          </div>
+          <div class="salle-icones" aria-hidden="true">${icones}</div>
         </div>
       </div>
     </section>`;
