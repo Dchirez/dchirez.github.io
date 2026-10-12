@@ -170,9 +170,9 @@ export function initProjects(scope, t, lang) {
   const activeIndex = () => ((idx % n) + n) % n;
 
   // Scale the whole 3D rig to the viewport so the front card always fits.
-  // The orbit radius stays proportional to the card width (~2×) so the
-  // neighbouring cards sit just beyond the active one instead of overlapping
-  // its sides (which read as dark bands in dark mode).
+  // The orbit radius is set so two neighbouring cards are a card width (plus
+  // a gap) apart on the ring: with many projects the angle between cards is
+  // small, and a fixed radius made them slide under the active one.
   function applyGeometry() {
     const vw = window.innerWidth;
     const cardW = vw <= 380 ? 200 : vw <= 600 ? 230 : 300;
@@ -180,7 +180,7 @@ export function initProjects(scope, t, lang) {
     // Only large screens have enough width to show the side cards as readable
     // previews; below that they'd be clipped to dark bars, so we hide them.
     peekNeighbors = vw > 860;
-    radius = Math.round(cardW * 2.05);
+    radius = Math.round((cardW * 1.1) / (2 * Math.sin((theta * Math.PI) / 360)));
     coverflow.style.setProperty('--cf-w', `${cardW}px`);
     coverflow.style.setProperty('--cf-h', `${cardH}px`);
     coverflow.style.setProperty('--cf-vh', `${cardH + 80}px`);
@@ -212,8 +212,13 @@ export function initProjects(scope, t, lang) {
       card.classList.toggle('is-active', diff === 0);
     });
   }
+  // First placement without the spin transition: animating in from the
+  // untransformed stage would fly the front card through the camera.
+  stage.style.transition = 'none';
   applyGeometry();
   renderCover();
+  void stage.offsetWidth;
+  stage.style.transition = '';
   const go = (d) => { idx += d; renderCover(); };
 
   // Re-scale on resize / orientation change without losing the current card.
