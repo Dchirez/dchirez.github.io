@@ -1,12 +1,14 @@
 /* App entry — composes the single-page Éditorial portfolio in vanilla JS.
-   Handles language, theme, the tech globes, projects interactivity,
+   Handles language, the starfield, the tech galaxy, projects interactivity,
    the contact form (Formspree) and the scroll-progress bar.
    Styles are linked from index.html (no build step required). */
 import { PORTFOLIO } from './data.js';
 import { STR } from './i18n.js';
-import { Ic } from './ui.js';
-import { mountGlobe } from './components/globe.js';
+import { mountGalaxy } from './components/galaxy.js';
+import { hyperspace } from './components/hyperspace.js';
+import { openTechPage } from './components/techpage.js';
 import { mountCursor } from './components/cursor.js';
+import { mountStarfield } from './components/starfield.js';
 import { initProjects, projectsSectionHTML } from './components/projects.js';
 import {
   navHTML, heroHTML, skillsHTML, flagshipHTML,
@@ -17,19 +19,37 @@ const app = document.getElementById('root');
 
 const state = {
   lang: localStorage.getItem('pf-lang') || 'fr',
-  theme: localStorage.getItem('pf-theme') || 'light',
 };
 
-let globeCleanups = [];
+let galaxyCleanups = [];
 
-function applyTheme() {
-  document.documentElement.classList.toggle('dark', state.theme === 'dark');
-  localStorage.setItem('pf-theme', state.theme);
+
+function teardownGalaxy() {
+  galaxyCleanups.forEach((fn) => fn());
+  galaxyCleanups = [];
 }
 
-function teardownGlobes() {
-  globeCleanups.forEach((fn) => fn());
-  globeCleanups = [];
+// Mount the tech galaxy — sized to its column, clicking a tech jumps to its projects
+let galaxyWidth = 0;
+function galaxyWidthFor(host) {
+  return Math.max(260, Math.min(host.clientWidth || 1100, window.innerWidth - 24));
+}
+function mountGalaxies() {
+  teardownGalaxy();
+  app.querySelectorAll('[data-galaxy]').forEach((host) => {
+    const width = galaxyWidth = galaxyWidthFor(host);
+    galaxyCleanups.push(mountGalaxy(host, {
+      items: PORTFOLIO.stack, width,
+      height: Math.round(width < 700 ? width * 0.85 : Math.min(620, width * 0.52)),
+      iconSize: width < 380 ? 34 : width < 900 ? 42 : 48,
+      onSelect: (item, from) => hyperspace({
+        from,
+        onPeak: () => openTechPage(item, state.lang, STR[state.lang], {
+          onClose: () => host.querySelector('.galaxy')?.dispatchEvent(new Event('galaxy:reset')),
+        }),
+      }),
+    }));
+  });
 }
 
 function render() {
@@ -37,11 +57,11 @@ function render() {
   const lang = state.lang;
   document.documentElement.lang = lang;
 
-  teardownGlobes();
+  teardownGalaxy();
   app.innerHTML = `
     <div class="kit dir-editorial">
       <div class="scroll-prog" data-progress></div>
-      ${navHTML(t, lang, state.theme)}
+      ${navHTML(t, lang)}
       ${heroHTML(t, lang)}
       ${skillsHTML(t)}
       ${flagshipHTML(t, lang)}
@@ -52,14 +72,7 @@ function render() {
       ${footerHTML(t)}
     </div>`;
 
-  // Mount the tech globes (hero 400, skills 420) — responsive sizing
-  app.querySelectorAll('[data-globe]').forEach((host) => {
-    const baseSize = Number(host.dataset.globe);
-    const vw = window.innerWidth;
-    const scale = vw <= 400 ? 0.55 : vw <= 600 ? 0.65 : vw <= 860 ? 0.8 : 1;
-    const size = Math.round(baseSize * scale);
-    globeCleanups.push(mountGlobe(host, { items: PORTFOLIO.stack, size }));
-  });
+  mountGalaxies();
 
   initProjects(app, t, lang);
   wireNav();
@@ -69,7 +82,6 @@ function render() {
 
 function wireNav() {
   const langBtns = app.querySelectorAll('[data-action="lang"]');
-  const themeBtns = app.querySelectorAll('[data-action="theme"]');
   const menuBtn = app.querySelector('[data-action="menu"]');
   const drawer = document.querySelector('[data-mobile-drawer]');
   const overlay = document.querySelector('[data-mobile-overlay]');
@@ -103,14 +115,6 @@ function wireNav() {
     localStorage.setItem('pf-lang', state.lang);
     render();
   }));
-  themeBtns.forEach((btn) => btn.addEventListener('click', () => {
-    state.theme = state.theme === 'dark' ? 'light' : 'dark';
-    applyTheme();
-    // Update all theme button icons
-    app.querySelectorAll('[data-action="theme"]').forEach((b) => {
-      b.innerHTML = state.theme === 'dark' ? Ic.sun() : Ic.moon();
-    });
-  }));
 }
 
 function wireContactForm(t) {
@@ -137,7 +141,18 @@ function updateProgress() {
 
 window.addEventListener('scroll', updateProgress, { passive: true });
 window.addEventListener('resize', updateProgress);
+// Re-size the galaxy when its column changes width (rotation, window resize)
+let galaxyResize = 0;
+window.addEventListener('resize', () => {
+  clearTimeout(galaxyResize);
+  galaxyResize = setTimeout(() => {
+    const host = app.querySelector('[data-galaxy]');
+    if (host && Math.abs(galaxyWidthFor(host) - galaxyWidth) > 8) mountGalaxies();
+  }, 200);
+});
 
-applyTheme();
+// Dark only: the night sky shows behind every section
+document.documentElement.classList.add('dark');
+mountStarfield();
 render();
 mountCursor();

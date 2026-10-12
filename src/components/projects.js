@@ -16,7 +16,7 @@ function logoMarkup(p, imgSize, fontSize) {
     : `<span style="font-size:${fontSize}px">${p.icon}</span>`;
 }
 
-function projectCardHTML(p, lang, t) {
+export function projectCardHTML(p, lang, t) {
   const isUniv = p.type === 'univ';
   const badge = Badge({ tone: isUniv ? 'accent' : 'violet', size: 'sm', children: isUniv ? t.univShort : t.persoShort });
   return `
@@ -237,30 +237,33 @@ export function initProjects(scope, t, lang) {
     go(delta);
   }));
 
-  /* ---------- modal ---------- */
-  let onKey = null;
-  function openModal(id) {
-    const p = PORTFOLIO.projects.find((x) => x.id === id);
-    if (!p) return;
-    const wrap = document.createElement('div');
-    wrap.innerHTML = modalHTML(p, lang, t);
-    const overlay = wrap.firstElementChild;
-    document.body.appendChild(overlay);
-    document.body.style.overflow = 'hidden';
-    const close = () => {
-      overlay.remove();
-      document.body.style.overflow = '';
-      window.removeEventListener('keydown', onKey);
-    };
-    onKey = (e) => { if (e.key === 'Escape') close(); };
-    window.addEventListener('keydown', onKey);
-    overlay.addEventListener('mousedown', (e) => { if (e.target === overlay) close(); });
-    overlay.querySelector('[data-modal-close]').addEventListener('click', close);
-  }
+  const openModal = (id) => openProjectModal(id, lang, t);
 
   // expose grid-card opening via delegation (cards re-render on filter change)
   grid.addEventListener('click', (e) => {
     const btn = e.target.closest('[data-open]');
     if (btn) openModal(btn.dataset.open);
   });
+}
+
+/* ---------- modal (shared with the tech pages) ---------- */
+export function openProjectModal(id, lang, t) {
+  const p = PORTFOLIO.projects.find((x) => x.id === id);
+  if (!p) return;
+  const wrap = document.createElement('div');
+  wrap.innerHTML = modalHTML(p, lang, t);
+  const overlay = wrap.firstElementChild;
+  document.body.appendChild(overlay);
+  const prevOverflow = document.body.style.overflow;
+  document.body.style.overflow = 'hidden';
+  const close = () => {
+    overlay.remove();
+    document.body.style.overflow = prevOverflow;
+    window.removeEventListener('keydown', onKey, true);
+  };
+  // Capture phase + stopPropagation so Escape closes only the modal, not a tech page behind it
+  const onKey = (e) => { if (e.key === 'Escape') { e.stopPropagation(); close(); } };
+  window.addEventListener('keydown', onKey, true);
+  overlay.addEventListener('mousedown', (e) => { if (e.target === overlay) close(); });
+  overlay.querySelector('[data-modal-close]').addEventListener('click', close);
 }

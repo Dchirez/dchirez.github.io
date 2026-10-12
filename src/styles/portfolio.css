@@ -12,7 +12,12 @@
    creating a scroll container — `clip` keeps the sticky nav working, unlike
    `hidden` which would break it. */
 html { overflow-x: clip; }
-.kit { min-height: 100vh; background: var(--bg-page); color: var(--text-body); font-family: var(--font-sans); display: flex; flex-direction: column; transition: background var(--dur-base) var(--ease-out); position: relative; }
+.kit { min-height: 100vh; background: transparent; color: var(--text-body); font-family: var(--font-sans); display: flex; flex-direction: column; position: relative; z-index: 1;
+  /* cards let a hint of the night sky through */
+  --surface-card: rgba(19, 19, 25, 0.78); --surface-sunken: rgba(12, 12, 17, 0.72); }
+/* Night sky behind every section (see components/starfield.js) */
+html.dark, html.dark body { background: #05050a; }
+.starfield { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
 .kit * { box-sizing: border-box; }
 .container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 28px; }
 .container-narrow { max-width: var(--container-narrow); }
@@ -61,8 +66,10 @@ html { overflow-x: clip; }
 
 /* ---------- cards / grid ---------- */
 .proj-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
-.skills-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 56px; align-items: center; }
-@media (max-width: 860px) { .skills-grid { grid-template-columns: 1fr; gap: 32px; } }
+.skills-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px 56px; flex-wrap: wrap; margin-bottom: 44px; }
+.skills-intro { flex: 1 1 420px; max-width: 640px; }
+.skills-badges { flex: 0 1 auto; display: flex; flex-wrap: wrap; gap: 10px; max-width: 460px; }
+@media (max-width: 860px) { .skills-head { margin-bottom: 32px; } }
 @media (max-width: 900px) { .proj-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 600px) { .proj-grid { grid-template-columns: 1fr; } }
 .pcard { text-align: left; display: flex; flex-direction: column; gap: 14px; padding: 22px; width: 100%; background: var(--surface-card); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); cursor: pointer; transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base), border-color var(--dur-base); font-family: inherit; }

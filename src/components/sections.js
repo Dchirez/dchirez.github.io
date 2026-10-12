@@ -5,11 +5,10 @@ import { Ic, Button, StatusPill, TechBadge } from '../ui.js';
 const ID = PORTFOLIO.identity;
 
 /* ---------- NAV ---------- */
-export function navHTML(t, lang, theme) {
+export function navHTML(t, lang) {
   const tools = `
     <div class="nav-tools">
       <button class="icon-btn lang-btn" data-action="lang">${lang === 'fr' ? 'EN' : 'FR'}</button>
-      <button class="icon-btn" data-action="theme" aria-label="theme">${theme === 'dark' ? Ic.sun() : Ic.moon()}</button>
       <a class="icon-btn" href="${ID.github}" target="_blank" rel="noopener" aria-label="GitHub">${Ic.github()}</a>
       <span class="nav-cta">
         ${Button({ size: 'sm', variant: 'secondary', href: ID.cv, target: '_blank', icon: Ic.fileText(), children: t.cv })}
@@ -50,8 +49,7 @@ export function navHTML(t, lang, theme) {
         ${Button({ size: 'md', variant: 'secondary', href: ID.cv, target: '_blank', full: true, icon: Ic.fileText(), children: t.cv })}
         <div class="drawer-tools">
           <button class="icon-btn lang-btn" data-action="lang">${lang === 'fr' ? 'EN' : 'FR'}</button>
-          <button class="icon-btn" data-action="theme" aria-label="theme">${theme === 'dark' ? Ic.sun() : Ic.moon()}</button>
-          <a class="icon-btn" href="${ID.github}" target="_blank" rel="noopener" aria-label="GitHub">${Ic.github()}</a>
+              <a class="icon-btn" href="${ID.github}" target="_blank" rel="noopener" aria-label="GitHub">${Ic.github()}</a>
         </div>
       </div>
     </div>
@@ -88,15 +86,17 @@ export function skillsHTML(t) {
   const badges = ['java', 'c', 'typescript', 'angular', 'python', 'kotlin']
     .map((tk) => TechBadge(tk, 'lg', true)).join('');
   return `
-    <section class="section" id="competences" style="background:var(--bg-page-alt)">
-      <div class="container skills-grid">
-        <div>
-          <span class="eyebrow">${Ic.sparkle()} ${t.skillsEyebrow}</span>
-          <h2 class="h-section">${t.skillsTitle}</h2>
-          <p class="lead" style="margin-top:16px">${t.skillsLead}</p>
-          <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:26px">${badges}</div>
+    <section class="section" id="competences">
+      <div class="container">
+        <div class="skills-head">
+          <div class="skills-intro">
+            <span class="eyebrow">${Ic.sparkle()} ${t.skillsEyebrow}</span>
+            <h2 class="h-section">${t.skillsTitle}</h2>
+            <p class="lead" style="margin-top:16px">${t.skillsLead}</p>
+          </div>
+          <div class="skills-badges">${badges}</div>
         </div>
-        <div style="display:flex;justify-content:center"><div class="globe-host" data-globe="420"></div></div>
+        <div class="galaxy-host" data-galaxy></div>
       </div>
     </section>`;
 }
@@ -182,7 +182,7 @@ export function formationsHTML(t, lang) {
       <div class="meta">${f.org} · ${f.years}</div>
     </div>`).join('');
   return `
-    <section class="section" id="parcours" style="background:var(--bg-page-alt)">
+    <section class="section" id="parcours">
       <div class="container container-narrow">
         <div style="text-align:center;margin-bottom:44px">
           <span class="eyebrow">${Ic.sparkle()} ${t.eduEyebrow}</span>

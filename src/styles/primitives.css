@@ -1,5 +1,5 @@
 /* ============================================================
-   UI primitives + globe + coverflow
+   UI primitives + galaxy + coverflow
    (classes that replace the prototype's inline JSX styles)
    ============================================================ */
 
@@ -62,27 +62,77 @@
 .tech-badge.is-interactive { cursor: pointer; }
 .tech-badge.is-interactive:hover { transform: translateY(-2px); border-color: var(--border-accent); }
 
-/* ---------- TechGlobe ---------- */
-.globe-scene { cursor: grab; user-select: none; touch-action: none; display: flex; align-items: center; justify-content: center; }
-.globe-sphere { position: relative; width: 0; height: 0; transform-style: preserve-3d; }
-.globe-item { position: absolute; transform-style: preserve-3d; }
-.globe-tile {
-  border-radius: var(--radius-md); background: var(--surface-card); border: 1px solid var(--border);
-  box-shadow: var(--shadow-sm); display: flex; align-items: center; justify-content: center;
+/* ---------- TechGalaxy ---------- */
+.galaxy { position: relative; width: 100%; user-select: none; }
+/* No frame: the canvas edges dissolve into the page's night sky */
+.galaxy canvas {
+  display: block;
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 60%, transparent 100%);
+  mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 60%, transparent 100%);
 }
-.globe-tile img { pointer-events: none; }
+.galaxy-items { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+.galaxy-item {
+  position: absolute; left: 0; top: 0; padding: 0; border: 0; background: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; will-change: transform;
+}
+.galaxy-tile {
+  width: 100%; height: 100%; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.95), rgba(225,230,245,.88));
+  box-shadow: 0 0 0 1px rgba(255,255,255,.35), 0 0 18px rgba(170,200,255,.45), 0 0 4px rgba(255,255,255,.8);
+  transition: box-shadow .25s, transform .25s;
+}
+.galaxy-tile img { pointer-events: none; }
+.galaxy-label {
+  position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%); white-space: nowrap;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; color: #f4ecff;
+  text-shadow: 0 0 8px rgba(0,0,0,.9); opacity: 0; transition: opacity .2s; pointer-events: none;
+}
+.galaxy-item:hover, .galaxy-item:focus-visible { z-index: 200 !important; opacity: 1 !important; }
+.galaxy-item:hover .galaxy-tile, .galaxy-item:focus-visible .galaxy-tile, .galaxy-item.is-target .galaxy-tile {
+  transform: scale(1.18); box-shadow: 0 0 0 2px rgba(255,200,140,.9), 0 0 28px rgba(255,170,90,.8);
+}
+.galaxy-item:hover .galaxy-label, .galaxy-item:focus-visible .galaxy-label, .galaxy-item.is-target .galaxy-label { opacity: 1; }
+.galaxy-item:focus-visible { outline: none; }
+.galaxy.is-zooming .galaxy-items { pointer-events: none; }
 
-/* Wireframe grid (meridians + parallels) */
-.globe-wire { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-style: preserve-3d; pointer-events: none; }
-.globe-ring {
-  position: absolute; left: 0; top: 0; border-radius: 50%;
-  border: 1px solid color-mix(in srgb, var(--globe-grid, var(--accent)) 32%, transparent);
-  box-shadow: 0 0 14px color-mix(in srgb, var(--globe-grid, var(--accent)) 12%, transparent) inset;
-  backface-visibility: visible;
+/* Hyperspace jump overlay */
+.hyperspace { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 300; pointer-events: none; }
+
+/* Tech page (always dark: it is deep space) */
+.techpage {
+  position: fixed; inset: 0; z-index: 95; overflow-y: auto; overscroll-behavior: contain;
+  background: radial-gradient(ellipse at 50% -10%, rgba(255,140,60,.18), transparent 55%), #05050c;
+  color: var(--text-body); font-family: var(--font-sans); animation: techpage-in .5s var(--ease-out, ease-out);
 }
-.globe-ring--parallel {
-  border-color: color-mix(in srgb, var(--globe-grid, var(--accent)) 22%, transparent);
-  box-shadow: none;
+.techpage * { box-sizing: border-box; }
+.techpage.is-leaving { animation: techpage-out .32s ease-in forwards; }
+.techpage-stars {
+  position: fixed; inset: 0; pointer-events: none; opacity: .7;
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, #fff, transparent), radial-gradient(1px 1px at 72% 12%, #cfe0ff, transparent),
+    radial-gradient(1.5px 1.5px at 38% 64%, #fff, transparent), radial-gradient(1px 1px at 86% 48%, #ffe2c0, transparent),
+    radial-gradient(1px 1px at 22% 82%, #cfe0ff, transparent), radial-gradient(1.5px 1.5px at 58% 34%, #fff, transparent),
+    radial-gradient(1px 1px at 92% 86%, #fff, transparent), radial-gradient(1px 1px at 6% 52%, #ffe2c0, transparent);
+  background-size: 420px 420px; animation: techpage-drift 90s linear infinite;
+}
+.techpage-inner { position: relative; padding-top: 32px; padding-bottom: 80px; }
+.techpage-head { display: flex; align-items: center; gap: 24px; margin: 40px 0 44px; }
+.techpage-icon {
+  flex: none; width: 104px; height: 104px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(circle at 35% 30%, #fff, #e3e7f3);
+  box-shadow: 0 0 0 2px rgba(255,200,140,.6), 0 0 60px rgba(255,160,80,.45);
+}
+.techpage-count { margin-top: 8px; font-family: var(--font-mono); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-faint); }
+@media (max-width: 600px) {
+  .techpage-head { gap: 16px; margin: 28px 0 32px; }
+  .techpage-icon { width: 72px; height: 72px; }
+  .techpage-icon img { width: 44px; height: 44px; }
+}
+@keyframes techpage-in { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: none; } }
+@keyframes techpage-out { to { opacity: 0; transform: scale(.97); } }
+@keyframes techpage-drift { to { background-position: 0 -420px; } }
+@media (prefers-reduced-motion: reduce) {
+  .techpage, .techpage.is-leaving, .techpage-stars { animation: none; }
 }
 
 /* ---------- Coverflow ---------- */

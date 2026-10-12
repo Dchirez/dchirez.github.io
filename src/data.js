@@ -17,7 +17,7 @@ export const PORTFOLIO = {
     cv: '/cv/',
     formspree: 'https://formspree.io/f/mykbjbdb',
   },
-  // devicon stack for the skills globe
+  // devicon stack for the skills galaxy
   stack: [
     { tech: 'java', label: 'Java' }, { tech: 'c', label: 'C' },
     { tech: 'typescript', label: 'TypeScript' }, { tech: 'angular', label: 'Angular' },

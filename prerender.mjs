@@ -20,14 +20,13 @@ try {
   const { projectsSectionHTML } = await vite.ssrLoadModule('/src/components/projects.js');
 
   const lang = 'fr';            // canonical language
-  const theme = 'light';        // default theme
   const t = STR[lang];
 
   // Mirror of render() in src/main.js
   const inner = `
     <div class="kit dir-editorial">
       <div class="scroll-prog" data-progress></div>
-      ${S.navHTML(t, lang, theme)}
+      ${S.navHTML(t, lang)}
       ${S.heroHTML(t, lang)}
       ${S.skillsHTML(t)}
       ${S.flagshipHTML(t, lang)}
